@@ -1,5 +1,4 @@
-const config = require('./config/env');
-const db = require('./config/db/db-config');
+const db = require('./models/index');
 
 const express = require('express');
 const PORT = 8080;
@@ -14,5 +13,7 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
-console.log(config.config);
-db.sequelize.authenticate().then(() => console.log("Successfully connected")).catch(err => console.log(err));
+console.log(db.environment);
+db.sequelize.authenticate()
+    .then(() => console.log("Successfully connected"))
+    .catch(err => console.log(err));

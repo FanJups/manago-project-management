@@ -11,7 +11,7 @@ services:
       - '../frontend:/usr/src/app'
       - '../frontend/usr/src/app/node_modules'
     ports:
-      - '4200:4200'
+      - 4200:4200
     networks:
       - manago
 
@@ -21,14 +21,17 @@ services:
       context: ../backend
       dockerfile: Dockerfile
     ports:
-      - '49160:8080'
+      - 8080:8080
+    depends_on:
+      - project-db
+    environment:
+      WAIT_HOSTS: project-db:3306
     networks:
       - manago
 
   project-db:
     container_name: mysql-db
     image: mysql:5
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=manago
@@ -37,6 +40,12 @@ services:
       - /data/mysql
     ports:
       - 3306:3306
+    restart: always
+    healthcheck:
+      test:  ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
     networks:
       - manago
 
