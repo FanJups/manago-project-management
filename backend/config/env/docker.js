@@ -1,5 +1,7 @@
 module.exports =  {
     env: 'docker',
-    db: 'mysql://mysql-db:3306/manago',
-    port: 8080
+    db_host: "mysql-db",
+    db_port: '3306',
+    db_name: 'manago',
+    app_port: 8080
 }

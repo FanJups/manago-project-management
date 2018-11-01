@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "express": "^4.16.1",
-    "prettier": "^1.14.3"
+    "mysql2": "^1.6.1",
+    "prettier": "^1.14.3",
+    "sequelize": "^4.41.0"
   }
 }

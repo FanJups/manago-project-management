@@ -1,5 +1,7 @@
 module.exports =  {
     env: 'development',
-    db: 'mysql://localhost:3306/manago',
-    port: 8080
+    db_host: "localhost",
+    db_port: '3306',
+    db_name: 'manago',
+    app_port: 8080
 }
