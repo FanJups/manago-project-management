@@ -8,19 +8,7 @@ const HOST = '0.0.0.0';
 
 const app = express();
 app.use(bodyParser.json());
-
-
-app.get('/', (req, res) => {
-    res.send('Hello world\n');
-});
-
-app.post('/test-post', (req, res) => {
-    console.log(req.body);
-    const obj = {
-        test: "Test"
-    };
-    res.status(201).send(obj);
-});
+app.use(require('./routes'));
 
 
 app.listen(PORT, HOST);
