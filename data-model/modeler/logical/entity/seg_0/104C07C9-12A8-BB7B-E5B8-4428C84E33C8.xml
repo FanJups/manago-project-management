@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="104C07C9-12A8-BB7B-E5B8-4428C84E33C8" name="User">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:11:52 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="userId" id="24AE9920-B735-4CB5-7BBA-6EC66B0D0434">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:11:57 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="username" id="183BB4F6-D9A7-0834-0D06-1BACA4B505EA">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:12:00 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="email" id="069F1E66-7333-619E-0813-6DFD0D4B808F">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:12:04 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B1F3C90C-CCDE-DE17-FABB-DA6EB2C93EB2" name="User PK">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:11:59 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>24AE9920-B735-4CB5-7BBA-6EC66B0D0434</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

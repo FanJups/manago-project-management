@@ -1,0 +1,119 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3A7A8DC2-D786-8F85-A7D8-D0612ADF3A04" name="Customer">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:21:16 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="customerId" id="6384920E-8ED8-8AFE-C9C4-590E4C7B752B">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:22:05 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="firstName" id="0482BB7B-43CE-613E-37F4-35D621114A60">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:24:55 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="lastName" id="9C429E50-C6AA-6A00-AC91-873BCDC29D73">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:25:09 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="email" id="D884B678-0DB9-E1A3-7E78-DF5DA9B5F720">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:27:15 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="company" id="FFC99081-2EBF-4761-A262-75B05E22F9B6">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:25:15 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="address" id="304638A0-C606-9D0F-2DEA-ADF87D9BADA1">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:25:38 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="city" id="87A3B31E-C1FD-5888-EB3F-DC2564661205">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:25:50 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="zipCode" id="9FF2D8A0-5C88-9587-7B5E-62260F583D9E">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:25:54 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="30D18D6C-A84E-2C2B-5694-A9A6D27AA1F9" name="Customer PK">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:24:52 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6384920E-8ED8-8AFE-C9C4-590E4C7B752B</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="8CFD67B1-1A2D-3C18-978C-CACB8EB5F86B" name="Task">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:55:12 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="taskId" id="AEA54C3E-08A4-2F14-59AF-1E6DFD877DD1">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:55:18 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="9CB16068-B348-531A-A582-C7D71B43829D">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:55:22 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="projectId" id="4F687E81-8506-1D6D-9575-CF23867DB8DC">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 19:24:33 UTC</createdTime>
+<generatorID>3874A266-91BC-577A-E7B2-5F43CFEC65DC</generatorID>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<referedAttribute>F0CAD9D8-4BD3-261B-B3F4-ED19167389B5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="00296428-704B-A1E6-B169-EBF26BA3909C" name="Task PK">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:55:20 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>AEA54C3E-08A4-2F14-59AF-1E6DFD877DD1</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

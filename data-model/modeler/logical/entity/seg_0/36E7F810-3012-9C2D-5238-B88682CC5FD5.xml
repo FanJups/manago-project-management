@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="36E7F810-3012-9C2D-5238-B88682CC5FD5" name="Project">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:21:46 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="projectId" id="F0CAD9D8-4BD3-261B-B3F4-ED19167389B5">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:26:36 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="02657A40-57A1-1361-7331-7BE8BF866B09">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:26:40 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="FBFB78A9-4940-3509-ABC5-FDF5E53B2389">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:29:00 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="teamId" id="D50C58D4-6AC4-5CE1-D585-81FED03E4274">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 20:05:58 UTC</createdTime>
+<generatorID>5E32D21C-F9AE-FD67-507B-BC607B3A763E</generatorID>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<referedAttribute>9A48182A-118F-380A-0791-3331B079F9EC</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="EB688CC4-2EE9-41FB-EF43-4915CFA34080" name="Project PK">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:26:39 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>F0CAD9D8-4BD3-261B-B3F4-ED19167389B5</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

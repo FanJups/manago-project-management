@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3B0A75F8-D4F2-2853-6326-67802407520C" name="History">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:58:59 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="historyId" id="7EAFB5D4-FB21-38E9-495B-440173CEFD49">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:59:15 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="operation" id="34C957D6-83F2-F62E-5C9D-A156D341BCA7">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:59:22 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="subtaskId" id="2FA51863-5AB0-7E25-B2BA-DA8C3292370A">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 20:06:48 UTC</createdTime>
+<generatorID>8420940B-8F82-4880-5698-8F66DE400CDF</generatorID>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<referedAttribute>E3F8892F-90B5-F1C1-2E7F-63EBAD8EA712</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F6DF86B7-B066-9195-55B5-B1EFE257DEA7" name="History PK">
+<createdBy>iwomalyszka</createdBy>
+<createdTime>2018-11-19 18:59:21 UTC</createdTime>
+<ownerDesignName>modeler</ownerDesignName>
+<engineerTo>
+<item key="2157C62D-6585-7897-CD5D-555194694C8C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7EAFB5D4-FB21-38E9-495B-440173CEFD49</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
