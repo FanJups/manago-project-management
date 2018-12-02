@@ -38,5 +38,8 @@ Object.keys(db).forEach((modelName) => {
 db.environment = env;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db["Customer"].belongsToMany(db["Project"], {through: "CustomerProject", foreignKey: "customerId", otherKey: "projectName"});
+db["Project"].belongsToMany(db["Customer"], {through: "CustomerProject", foreignKey: "projectName", otherKey: "customerId"});
+
 
 module.exports = db;

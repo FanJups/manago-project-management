@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     zipCode: DataTypes.STRING
   }, {
-    timestamps: false
+    timestamps: false, freezeTableName: true
   });
   Customer.associate = function(models) {
-    // associations can be defined here
+
   };
   return Customer;
 };
