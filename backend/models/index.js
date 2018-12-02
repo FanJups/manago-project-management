@@ -10,9 +10,6 @@ const db = {};
 
 Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
     date = this._applyTimezone(date, options);
-
-    // Z here means current timezone, _not_ UTC
-    // return date.format('YYYY-MM-DD HH:mm:ss.SSS Z');
     return date.format('YYYY-MM-DD HH:mm:ss.SSS');
 };
 
@@ -35,11 +32,15 @@ Object.keys(db).forEach((modelName) => {
     }
 });
 
+
+db.customer = require('./customer')(sequelize, Sequelize);
+db.project = require('./project')(sequelize, Sequelize);
+db.customer.belongsToMany(db.project, {through: "CustomerProject", foreignKey: "customerId", otherKey: "projectName"});
+db.project.belongsToMany(db.customer, {through: "CustomerProject", foreignKey: "projectName", otherKey: "customerId"});
+
 db.environment = env;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db["Customer"].belongsToMany(db["Project"], {through: "CustomerProject", foreignKey: "customerId", otherKey: "projectName"});
-db["Project"].belongsToMany(db["Customer"], {through: "CustomerProject", foreignKey: "projectName", otherKey: "customerId"});
 
 
 module.exports = db;

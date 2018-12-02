@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const testCreate = () => {
-    db["Customer"].create({
+    db.customer.create({
         firstName: "Test",
         lastName: "last name",
         email: "a@a.a"
@@ -18,6 +18,14 @@ const testCreate = () => {
         .then(customer => console.log(customer))
         .catch(err => console.log(err))
 };
+
+const testGet = () => {
+    db.customer.findAll({
+        include: [db.project]
+    }).then(data => {
+        console.log(data);
+    })
+}
 //app.use(require('./routes'));
 
 
@@ -26,7 +34,7 @@ console.log(`Running on http://${HOST}:${PORT}`);
 console.log(db.environment);
 db.sequelize.authenticate()
     .then(() => {
-        console.log("Successfully connected")
-        testCreate();
+        console.log("Successfully connected");
+        testGet();
     })
     .catch(err => console.log(err));
