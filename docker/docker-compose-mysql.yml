@@ -2,13 +2,13 @@ version: '3.5'
 
 services:
 
-  project-db:
-    container_name: mysql-db
+  manago-db:
+    container_name: manago-db
     image: mysql:5
     restart: always
     environment:
     - MYSQL_ROOT_PASSWORD=root
-    - MYSQL_DATABASE=manago
+    - MYSQL_DATABASE=manago_project
     - MYSQL_HOST=%
     volumes:
     - /data/mysql
@@ -17,14 +17,14 @@ services:
     networks:
     - manago
 
-  project-myadmin:
+  manago-myadmin:
     restart: always
-    container_name: phpmy-db
+    container_name: manago-myadmin
     image: phpmyadmin/phpmyadmin
     environment:
-    - PMA_HOST=mysql-db
+    - PMA_HOST=manago-db
     depends_on:
-    - project-db
+    - manago-db
     ports:
     - 8000:80
     networks:
