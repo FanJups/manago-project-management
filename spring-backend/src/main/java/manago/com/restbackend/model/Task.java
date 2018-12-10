@@ -34,10 +34,16 @@ public class Task extends Auditor implements Serializable {
     @OneToMany(mappedBy = "parent")
     private Set <Task> subtasks = new HashSet<Task>();
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_name", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Status status;
 
 }

@@ -9,11 +9,11 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
-public class Status extends Auditor implements Serializable {
-    private static final long serialVersionUID = 5313493413859894404L;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResourceType implements Serializable {
+    private static final long serialVersionUID = 5313493413859894409L;
 
     @Id
     private String name;
