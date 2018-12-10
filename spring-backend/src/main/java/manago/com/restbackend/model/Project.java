@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "project")
-public class Project extends Auditor implements Serializable {
+public class Project implements Serializable {
     private static final long serialVersionUID = 5313493413859894402L;
 
     @Id

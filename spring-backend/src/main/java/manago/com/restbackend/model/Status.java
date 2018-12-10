@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Status extends Auditor implements Serializable {
+public class Status implements Serializable {
     private static final long serialVersionUID = 5313493413859894404L;
 
     @Id
