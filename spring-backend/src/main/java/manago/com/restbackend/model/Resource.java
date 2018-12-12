@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,23 +17,29 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "project")
-public class Project implements Serializable {
-    private static final long serialVersionUID = 5313493413859894402L;
+public class Resource implements Serializable {
+    private static final long serialVersionUID = 5313493413859894408L;
 
     @Id
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long resourceId;
 
     @NotNull
-    private String description;
+    private String name;
+
+    private Double cost;
+
+    private String manufacturer;
+
+    private Date boughtAt;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "projects")
-    private Set<Customer> customers = new HashSet<>();
+    @ManyToMany(mappedBy = "resources")
+    private Set<Team> teams = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team")
+    @JoinColumn(name = "resource_type")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Team team;
+    private ResourceType resourceType;
 
 }
