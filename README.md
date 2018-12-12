@@ -26,7 +26,7 @@ $ mvn spring-boot:run
 - import project using _pom.xml_ file
 - _run_ -> _edit configurations_
 - select _environment_
-- pass spring profile to VM options `-Dspring-boot.run.profiles=<my_profile_here>`
+- pass spring profile to VM options `-Dspring-boot.run.profiles=<my_profile_here>`. (If you want to use H2 create/drop database then do not specify spring profile and leave VM options input empty. If you wish to use it alongside mysql docker image then use `mysql` profile. Eventually, if you want to run a full-stack application, skip this section and navigate to _How to run in Docker_)
 - apply changes and hit _run_
 
 #### Access PHPMyAdmin:
