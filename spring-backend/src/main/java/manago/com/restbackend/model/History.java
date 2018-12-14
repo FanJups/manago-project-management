@@ -26,9 +26,6 @@ public class History extends Auditor implements Serializable {
     @NotNull
     private String operationId;
 
-    @NotNull
-    private Date operationDate;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "task_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
