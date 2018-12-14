@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Task extends Auditor implements Serializable {
+public class Task implements Serializable {
     private static final long serialVersionUID = 5313493413859894403L;
 
     @Id

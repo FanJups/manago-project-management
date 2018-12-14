@@ -1,0 +1,11 @@
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("apple112314","interdum@ornareegestas.edu",50);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("john","luctus.felis@accumsan.com",80);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("truffle1012","augue.eu@acturpisegestas.org",110);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("ccc","ac@pede.edu",140);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("johny","mi.lacinia@felisNulla.net",170);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("admin","tempus.eu@elitafeugiat.edu",200);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("pumpkin","aliquet.vel.vulputate@sollicitudinorcisem.org",230);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("admin34","molestie@rutrumurna.com",260);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("loremIpsum","nunc.est.mollis@Morbi.ca",290);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("user1333","neque.Nullam@euismodmauriseu.ca",320);
+INSERT INTO `user` (`username`,`email`,`employee_id`) VALUES ("bananas","Aliquam.rutrum.lorem@eleifendegestas.edu",350);

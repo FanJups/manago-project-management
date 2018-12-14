@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `history` (
   `history_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `operation_date` datetime NOT NULL,
   `operation_id` varchar(255) NOT NULL,
   `task_id` bigint(20) NOT NULL,
   PRIMARY KEY (`history_id`),
@@ -83,8 +82,6 @@ CREATE TABLE IF NOT EXISTS `status` (
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE IF NOT EXISTS `task` (
   `task_id` bigint(20) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
   `name` varchar(255) NOT NULL,
   `parent_id` bigint(20) DEFAULT NULL,
   `project_name` varchar(255) NOT NULL,
