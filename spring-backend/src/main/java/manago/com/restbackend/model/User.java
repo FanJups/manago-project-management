@@ -1,5 +1,6 @@
 package manago.com.restbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class User implements Serializable {
     @NotNull
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
+    @JsonBackReference
     private Employee employee;
 }
