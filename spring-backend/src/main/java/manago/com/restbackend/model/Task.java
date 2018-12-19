@@ -41,7 +41,7 @@ public class Task implements Serializable {
     @JsonIgnore
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Status status;

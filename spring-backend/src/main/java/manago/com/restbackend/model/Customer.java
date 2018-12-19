@@ -1,5 +1,7 @@
 package manago.com.restbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -40,6 +42,7 @@ public class Customer implements Serializable {
     private String zipCode;
 
     @ToString.Exclude
+    @JsonBackReference
     @ManyToMany(cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "customer_project",
