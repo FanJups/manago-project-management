@@ -1,8 +1,8 @@
-package manago.com.restbackend.controller.test;
+package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import manago.com.restbackend.model.Customer;
-import manago.com.restbackend.service.CustomerService;
+import manago.com.restbackend.service.impl.ProjectServiceImpl;
+import manago.com.restbackend.shared.response.ProjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,15 +15,15 @@ import java.util.List;
 @RestController
 @Slf4j
 @CrossOrigin
-public class CustomerController {
+public class ProjectController {
 
     @Autowired
-    CustomerService customerService;
+    ProjectServiceImpl projectService;
 
     @GetMapping
-    @RequestMapping(path = "/customers", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<Customer> getAllCustomers() {
-        return customerService.all();
+    @RequestMapping(path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<ProjectResponse> getAllCustomers() {
+        return projectService.all();
     }
 
 }

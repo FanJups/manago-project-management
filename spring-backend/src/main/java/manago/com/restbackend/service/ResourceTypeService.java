@@ -1,4 +1,4 @@
 package manago.com.restbackend.service;
 
-public class ResourceTypeService {
+public interface ResourceTypeService {
 }

@@ -1,4 +1,4 @@
 package manago.com.restbackend.service;
 
-public class StatusService {
+public interface StatusService {
 }
