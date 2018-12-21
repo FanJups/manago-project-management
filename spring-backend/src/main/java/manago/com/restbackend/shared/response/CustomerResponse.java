@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerResponse {
     private Long customerId;
     private String firstName;

@@ -10,4 +10,7 @@ import java.util.List;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
     @Override
     List<Customer> findAll();
+
+    Customer findByCustomerId(Long customerId);
+    void deleteByCustomerId(Long customerId);
 }
