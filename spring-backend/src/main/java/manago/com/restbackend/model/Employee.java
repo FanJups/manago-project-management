@@ -1,5 +1,7 @@
 package manago.com.restbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,11 +36,13 @@ public class Employee implements Serializable {
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "employees")
+    @JsonBackReference
     private Set<Team> teams = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.EAGER,
         cascade = CascadeType.PERSIST,
         mappedBy = "employee")
+    @JsonManagedReference
     private User user;
 
 }

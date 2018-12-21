@@ -1,5 +1,6 @@
 package manago.com.restbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,22 +24,26 @@ public class Team implements Serializable {
 
     private Double monthlyCost;
 
-    @ToString.Exclude
+
     @ManyToMany(cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "team_employee",
             joinColumns = { @JoinColumn(name = "name")},
             inverseJoinColumns = { @JoinColumn(name = "employee_id")}
     )
+    @ToString.Exclude
+    @JsonManagedReference
     Set<Employee> employees = new HashSet<>();
 
-    @ToString.Exclude
+
     @ManyToMany(cascade = { CascadeType.PERSIST })
     @JoinTable(
             name = "team_resource",
             joinColumns = { @JoinColumn(name = "name")},
             inverseJoinColumns = { @JoinColumn(name = "resource_id")}
     )
+    @ToString.Exclude
+    @JsonManagedReference
     Set<Resource> resources = new HashSet<>();
 
 }

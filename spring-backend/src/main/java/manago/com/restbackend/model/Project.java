@@ -1,5 +1,6 @@
 package manago.com.restbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -26,11 +27,12 @@ public class Project implements Serializable {
     @NotNull
     private String description;
 
-    @ToString.Exclude
     @ManyToMany(mappedBy = "projects")
+    @ToString.Exclude
+    @JsonManagedReference
     private Set<Customer> customers = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Team team;
