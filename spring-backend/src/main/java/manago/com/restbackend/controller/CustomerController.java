@@ -5,10 +5,7 @@ import manago.com.restbackend.service.impl.CustomerServiceImpl;
 import manago.com.restbackend.shared.response.CustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,12 @@ public class CustomerController {
     public List<CustomerResponse> getAllCustomers() {
         return customerService.all();
     }
+
+    @GetMapping
+    @RequestMapping(path = "/customers/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public CustomerResponse getCustomer(@PathVariable String id) {
+        return customerService.one(Long.parseLong(id));
+    }
+
 
 }

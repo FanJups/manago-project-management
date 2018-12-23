@@ -2,13 +2,13 @@ package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import manago.com.restbackend.service.impl.ProjectServiceImpl;
+import manago.com.restbackend.shared.request.ProjectRequest;
 import manago.com.restbackend.shared.response.ProjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +22,32 @@ public class ProjectController {
 
     @GetMapping
     @RequestMapping(path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<ProjectResponse> getAllCustomers() {
+    public List<ProjectResponse> getAllProjects() {
         return projectService.all();
     }
 
+    @GetMapping
+    @RequestMapping(path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ProjectResponse getProject(@PathVariable String name) {
+        return projectService.one(name);
+    }
+
+    @PutMapping
+    @RequestMapping(path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ProjectResponse updateProject(@PathVariable String name, @RequestBody ProjectRequest request) {
+        return projectService.update(name, request);
+    }
+
+    @PostMapping
+    @RequestMapping(path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ProjectResponse createProject(@RequestBody ProjectRequest request) {
+        return projectService.create(request);
+    }
+
+    @DeleteMapping
+    @RequestMapping(path = "/projects/{name}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteProject(@PathVariable String name) {
+        projectService.delete(name);
+    }
 }

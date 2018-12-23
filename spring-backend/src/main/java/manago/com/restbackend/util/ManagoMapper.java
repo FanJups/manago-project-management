@@ -2,14 +2,20 @@ package manago.com.restbackend.util;
 
 import manago.com.restbackend.model.Customer;
 import manago.com.restbackend.model.Project;
+import manago.com.restbackend.model.Task;
 import manago.com.restbackend.model.Team;
+import manago.com.restbackend.shared.request.ProjectRequest;
 import manago.com.restbackend.shared.response.CustomerResponse;
 import manago.com.restbackend.shared.response.ProjectResponse;
+import manago.com.restbackend.shared.response.TaskResponse;
 import manago.com.restbackend.shared.response.TeamResponse;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class ManagoMapper {
@@ -37,7 +43,26 @@ public class ManagoMapper {
         return resp;
     }
 
+    public Project projectRequestToProject(ProjectRequest request) {
+        return modelMapper.map(request, Project.class);
+    }
+
     public TeamResponse teamToTeamResponse(Team team) {
         return modelMapper.map(team, TeamResponse.class);
+    }
+
+    public TaskResponse taskToTaskResponse(Task task) {
+        TaskResponse resp = modelMapper.map(task, TaskResponse.class);
+        if (task.getParent() != null) {
+            resp.setParentId(task.getParent().getTaskId());
+        }
+        if (task.getSubtasks().size() > 0) {
+            resp.setSubTaskResponses(
+                    task.getSubtasks().stream()
+                        .map(this::taskToTaskResponse)
+                        .collect(Collectors.toSet())
+            );
+        }
+        return resp;
     }
 }

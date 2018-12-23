@@ -30,4 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(mapper::customerToCustomerResponse)
                 .collect(Collectors.toList());
     }
+
+    public CustomerResponse one(Long id) {
+        return mapper.customerToCustomerResponse(customerRepository.findByCustomerId(id));
+    }
 }
