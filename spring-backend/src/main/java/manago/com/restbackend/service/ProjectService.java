@@ -10,4 +10,5 @@ public interface ProjectService {
     ProjectResponse one(String name);
     ProjectResponse update(String name, ProjectRequest request);
     ProjectResponse create(ProjectRequest request);
+    void delete(String name);
 }

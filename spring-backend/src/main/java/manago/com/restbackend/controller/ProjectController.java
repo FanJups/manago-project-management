@@ -5,7 +5,9 @@ import manago.com.restbackend.service.impl.ProjectServiceImpl;
 import manago.com.restbackend.shared.request.ProjectRequest;
 import manago.com.restbackend.shared.response.ProjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,4 +44,10 @@ public class ProjectController {
         return projectService.create(request);
     }
 
+    @DeleteMapping
+    @RequestMapping(path = "/projects/{name}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteProject(@PathVariable String name) {
+        projectService.delete(name);
+    }
 }

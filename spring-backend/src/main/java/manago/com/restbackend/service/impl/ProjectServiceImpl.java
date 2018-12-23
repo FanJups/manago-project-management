@@ -72,6 +72,12 @@ public class ProjectServiceImpl implements ProjectService {
         return mapper.projectToProjectResponse(project);
     }
 
+    @Override
+    @Transactional
+    public void delete(String name) {
+        projectRepository.deleteByName(name);
+    }
+
     private Set<Customer> getCustomersByIds(Set<Long> ids) {
         return ids.stream()
                 .distinct()
