@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -41,14 +42,31 @@ public class Customer implements Serializable {
 
     private String zipCode;
 
+
     @ToString.Exclude
     @JsonBackReference
-    @ManyToMany(cascade = { CascadeType.PERSIST })
-    @JoinTable(
-            name = "customer_project",
-            joinColumns = { @JoinColumn(name = "customer_id")},
-            inverseJoinColumns = { @JoinColumn(name = "name")}
-    )
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH},
+            mappedBy = "customers")
     Set<Project> projects = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(customerId, customer.customerId) &&
+                Objects.equals(firstName, customer.firstName) &&
+                Objects.equals(lastName, customer.lastName) &&
+                Objects.equals(email, customer.email) &&
+                Objects.equals(company, customer.company) &&
+                Objects.equals(address, customer.address) &&
+                Objects.equals(city, customer.city) &&
+                Objects.equals(zipCode, customer.zipCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, firstName, lastName, email, company, address, city, zipCode);
+    }
 
 }

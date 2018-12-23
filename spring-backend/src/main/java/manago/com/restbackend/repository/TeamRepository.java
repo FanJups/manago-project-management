@@ -9,4 +9,5 @@ import java.util.List;
 public interface TeamRepository extends CrudRepository<Team, String> {
     @Override
     List<Team> findAll();
+    Team findByName(String name);
 }

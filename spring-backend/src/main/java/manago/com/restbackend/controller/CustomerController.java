@@ -24,7 +24,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    @RequestMapping(path = "/customers/:id", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(path = "/customers/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public CustomerResponse getCustomer(@PathVariable String id) {
         return customerService.one(Long.parseLong(id));
     }

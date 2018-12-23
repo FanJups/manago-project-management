@@ -4,6 +4,7 @@ import manago.com.restbackend.model.Customer;
 import manago.com.restbackend.model.Project;
 import manago.com.restbackend.model.Task;
 import manago.com.restbackend.model.Team;
+import manago.com.restbackend.shared.request.ProjectRequest;
 import manago.com.restbackend.shared.response.CustomerResponse;
 import manago.com.restbackend.shared.response.ProjectResponse;
 import manago.com.restbackend.shared.response.TaskResponse;
@@ -40,6 +41,10 @@ public class ManagoMapper {
                 this.teamToTeamResponse(project.getTeam())
         );
         return resp;
+    }
+
+    public Project projectRequestToProject(ProjectRequest request) {
+        return modelMapper.map(request, Project.class);
     }
 
     public TeamResponse teamToTeamResponse(Team team) {

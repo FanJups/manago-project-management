@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProjectRepository extends CrudRepository<Project, String> {
     @Override
     List<Project> findAll();
+    Project findByName(String name);
+    void deleteByName(String name);
 }

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -27,14 +28,38 @@ public class Project implements Serializable {
     @NotNull
     private String description;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH
+    })
     @ToString.Exclude
     @JsonManagedReference
+    @JoinTable(
+            name = "customer_project",
+            joinColumns = { @JoinColumn(name = "name")},
+            inverseJoinColumns = { @JoinColumn(name = "customer_id")}
+    )
     private Set<Customer> customers = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Team team;
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(name, project.name) &&
+                Objects.equals(description, project.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
+    }
 
 }
