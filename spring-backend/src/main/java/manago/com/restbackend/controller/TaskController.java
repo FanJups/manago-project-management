@@ -22,7 +22,7 @@ public class TaskController {
 
     @GetMapping
     @RequestMapping(path = "/tasks", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<TaskResponse> getAllCustomers() {
+    public List<TaskResponse> getAllTasks() {
         return taskService.all();
     }
 
