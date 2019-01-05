@@ -27,3 +27,11 @@ mat-card {
 mat-card-title {
   text-transform: uppercase;
 }
+
+.narrow-column {
+  max-width: 5rem;
+}
+
+.wide-column {
+  min-width: 30rem;
+}

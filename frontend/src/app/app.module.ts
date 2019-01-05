@@ -13,6 +13,9 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { ProjectComponent } from './components/projects/project/project.component';
 import {AppRoutingModule} from './modules/routing.module';
 import {AppEndpoints} from './services/app-endpoints.service';
+import {CustomerService} from './services/customer.service';
+import {ProjectService} from './services/project.service';
+import {TeamService} from './services/team.service';
 
 
 @NgModule({
@@ -31,7 +34,7 @@ import {AppEndpoints} from './services/app-endpoints.service';
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [AppEndpoints],
+  providers: [AppEndpoints, CustomerService, ProjectService, TeamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
