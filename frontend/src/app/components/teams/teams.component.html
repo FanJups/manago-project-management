@@ -1,3 +1,49 @@
-<p>
-  teams works!
-</p>
+<mat-card>
+  <mat-card-title>Teams</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button >
+      <mat-icon>add_box</mat-icon>
+    </button>
+    <button mat-button >
+      <p>Calculate</p>
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="teams">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let team"> {{team.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="size">
+          <mat-header-cell *matHeaderCellDef> Size </mat-header-cell>
+          <mat-cell *matCellDef="let team"> {{team.size}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="monthlyCost">
+          <mat-header-cell *matHeaderCellDef> Monthly Cost </mat-header-cell>
+          <mat-cell *matCellDef="let team"> {{team.monthlyCost}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >edit</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
