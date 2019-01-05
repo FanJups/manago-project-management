@@ -1,3 +1,71 @@
-<p>
-  customers works!
-</p>
+<mat-card>
+  <mat-card-title>Customers</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button >
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="customers">
+        <ng-container matColumnDef="customerId">
+          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.customerId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.firstName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="company">
+          <mat-header-cell *matHeaderCellDef> Company </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.company}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.address}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="zipCode">
+          <mat-header-cell *matHeaderCellDef> Zip Code </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.zipCode}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.city}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >edit</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
