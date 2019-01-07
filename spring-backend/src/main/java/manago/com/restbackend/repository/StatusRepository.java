@@ -8,4 +8,5 @@ import java.util.List;
 public interface StatusRepository extends CrudRepository<Status, String> {
     @Override
     List<Status> findAll();
+    Status findByName(String name);
 }

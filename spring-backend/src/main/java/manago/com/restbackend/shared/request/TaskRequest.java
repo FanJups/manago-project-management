@@ -11,5 +11,5 @@ public class TaskRequest {
     private String name;
     private Long parentId;
     private Set<TaskRequest> subTaskRequests;
-    private StatusRequest statusRequest;
+    private String statusName;
 }

@@ -1,5 +1,6 @@
 package manago.com.restbackend.service.impl;
 
+import manago.com.restbackend.model.Status;
 import manago.com.restbackend.model.Task;
 import manago.com.restbackend.repository.ProjectRepository;
 import manago.com.restbackend.repository.StatusRepository;
@@ -43,15 +44,19 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponse one(long id) {
-        return mapper.taskToTaskResponse(taskRepository.findByTaskId(id));
+        return mapper.taskToTaskResponse(taskRepository.findByTaskId(id).get());
     }
 
     @Override
     public TaskResponse update(long id, TaskRequest request) {
-        Task task = taskRepository.findByTaskId(id);
+        Task task = taskRepository.findByTaskId(id).get();
         task.setName(request.getName());
-        task.setParent(taskRepository.findByTaskId(request.getParentId()));
-        task.setStatus(mapper.statusRequestToStatus(request.getStatusRequest()));
+        if(request.getParentId() == null) {
+            task.setParent(null);
+        } else {
+            if(taskRepository.findByTaskId(request.getParentId()).isPresent()) task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
+        }
+        task.setStatus(statusRepository.findByName(request.getStatusName()));
         taskRepository.save(task);
         return mapper.taskToTaskResponse(task);
     }
