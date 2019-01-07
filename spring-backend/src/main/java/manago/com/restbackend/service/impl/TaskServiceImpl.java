@@ -1,7 +1,11 @@
 package manago.com.restbackend.service.impl;
 
+import manago.com.restbackend.model.Task;
+import manago.com.restbackend.repository.ProjectRepository;
+import manago.com.restbackend.repository.StatusRepository;
 import manago.com.restbackend.repository.TaskRepository;
 import manago.com.restbackend.service.TaskService;
+import manago.com.restbackend.shared.request.TaskRequest;
 import manago.com.restbackend.shared.response.TaskResponse;
 import manago.com.restbackend.shared.response.TeamResponse;
 import manago.com.restbackend.util.ManagoMapper;
@@ -14,10 +18,14 @@ import java.util.stream.Collectors;
 public class TaskServiceImpl implements TaskService {
 
     private TaskRepository taskRepository;
+    private ProjectRepository projectRepository;
+    private StatusRepository statusRepository;
     private ManagoMapper mapper;
 
-    public TaskServiceImpl(TaskRepository taskRepository, ManagoMapper managoMapper) {
+    public TaskServiceImpl(TaskRepository taskRepository, ProjectRepository projectRepository, StatusRepository statusRepository, ManagoMapper managoMapper) {
         this.taskRepository = taskRepository;
+        this.projectRepository = projectRepository;
+        this.statusRepository = statusRepository;
         this.mapper = managoMapper;
     }
 
@@ -28,5 +36,33 @@ public class TaskServiceImpl implements TaskService {
                 .stream()
                 .map(mapper::taskToTaskResponse)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public TaskResponse one(long id) {
+        return mapper.taskToTaskResponse(taskRepository.findByTaskId(id));
+    }
+
+    @Override
+    public TaskResponse update(long id, TaskRequest request) {
+        Task task = taskRepository.findByTaskId(id);
+        task.setName(request.getName());
+        task.setParent(taskRepository.findByTaskId(request.getParentId()));
+        task.setStatus(mapper.statusRequestToStatus(request.getStatusRequest()));
+        taskRepository.save(task);
+        return mapper.taskToTaskResponse(task);
+    }
+
+    @Override
+    public TaskResponse create(TaskRequest request) {
+        Task task = mapper.taskRequestToTask(request);
+
+        taskRepository.save(task);
+        return mapper.taskToTaskResponse(task);
+    }
+
+    @Override
+    public void delete(long id) {
+        taskRepository.deleteByTaskId(id);
     }
 }

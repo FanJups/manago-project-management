@@ -4,9 +4,11 @@ import manago.com.restbackend.exception.model.ErrorMessage;
 import manago.com.restbackend.exception.model.ErrorMessages;
 import manago.com.restbackend.model.Customer;
 import manago.com.restbackend.model.Project;
+import manago.com.restbackend.model.Task;
 import manago.com.restbackend.model.Team;
 import manago.com.restbackend.repository.CustomerRepository;
 import manago.com.restbackend.repository.ProjectRepository;
+import manago.com.restbackend.repository.TaskRepository;
 import manago.com.restbackend.repository.TeamRepository;
 import manago.com.restbackend.service.ProjectService;
 import manago.com.restbackend.shared.request.ProjectRequest;
@@ -28,13 +30,15 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
     private CustomerRepository customerRepository;
     private TeamRepository teamRepository;
+    private TaskRepository taskRepository;
     private ManagoMapper mapper;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, CustomerRepository customerRepository, TeamRepository teamRepository, ManagoMapper mapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, CustomerRepository customerRepository, TeamRepository teamRepository, TaskRepository taskRepository, ManagoMapper mapper) {
         this.projectRepository = projectRepository;
         this.mapper = mapper;
         this.customerRepository = customerRepository;
         this.teamRepository = teamRepository;
+        this.taskRepository = taskRepository;
     }
 
     @Override
@@ -75,6 +79,22 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public void delete(String name) {
+        Project project = projectRepository.findByName(name);
+        project.setCustomers(null);
+        project.setTeam(null);
+
+        List<Task> tasks = taskRepository.findAll()
+                .stream()
+                .filter(i -> i.getProject().getName() == name)
+                .collect(Collectors.toList());
+        tasks.stream()
+                .filter(i -> i.getParent() != null)
+                .forEach(i -> taskRepository.deleteByTaskId(i.getTaskId()));
+        tasks.stream()
+                .filter(i -> i.getParent() == null)
+                .forEach(i -> taskRepository.deleteByTaskId(i.getTaskId()));
+
+        projectRepository.save(project);
         projectRepository.deleteByName(name);
     }
 

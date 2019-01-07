@@ -8,4 +8,6 @@ import java.util.List;
 public interface TaskRepository extends CrudRepository<Task, Long> {
     @Override
     List<Task> findAll();
+    Task findByTaskId(long id);
+    void deleteByTaskId(long id);
 }
