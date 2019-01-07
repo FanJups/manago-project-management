@@ -22,7 +22,7 @@ public class TeamController {
 
     @GetMapping
     @RequestMapping(path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<TeamResponse> getAllCustomers() {
+    public List<TeamResponse> getAllTeams() {
         return teamService.all();
     }
 

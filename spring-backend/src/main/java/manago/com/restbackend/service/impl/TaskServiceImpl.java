@@ -10,6 +10,7 @@ import manago.com.restbackend.shared.response.TaskResponse;
 import manago.com.restbackend.shared.response.TeamResponse;
 import manago.com.restbackend.util.ManagoMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,10 +31,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskResponse> all() {
+    public List<TaskResponse> all(String projectName) {
         return taskRepository
                 .findAll()
                 .stream()
+                .filter(task -> task.getProject().getName().equals(projectName))
+                .filter(task -> task.getParent() == null)
                 .map(mapper::taskToTaskResponse)
                 .collect(Collectors.toList());
     }
@@ -54,14 +57,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponse create(TaskRequest request) {
+    public TaskResponse create(TaskRequest request, String projectName) {
         Task task = mapper.taskRequestToTask(request);
-
+        task.setProject(projectRepository.findByName(projectName));
         taskRepository.save(task);
         return mapper.taskToTaskResponse(task);
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         taskRepository.deleteByTaskId(id);
     }

@@ -21,14 +21,16 @@ public class Task implements Serializable {
     private static final long serialVersionUID = 5313493413859894403L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
 
     @NotNull
     private String name;
 
     @ToString.Exclude
-    @ManyToOne(cascade = { CascadeType.ALL })
+    @ManyToOne()
     @JoinColumn(name = "parent_id")
+    @JsonIgnore
     private Task parent;
 
     @OneToMany(mappedBy = "parent")
@@ -37,13 +39,11 @@ public class Task implements Serializable {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_name", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Project project;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Status status;
 
 }

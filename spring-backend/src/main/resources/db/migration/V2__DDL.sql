@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: manago-db
--- Generation Time: Dec 23, 2018 at 12:26 PM
--- Server version: 5.7.24
--- PHP Version: 7.2.13
+-- Generation Time: Jan 07, 2019 at 03:33 PM
+-- Server version: 5.7.22
+-- PHP Version: 7.2.6
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET @@auto_increment_increment=10;
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -66,10 +66,6 @@ CREATE TABLE `employee` (
   `last_name` varchar(255) NOT NULL,
   `salary` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
-
 
 -- --------------------------------------------------------
 
@@ -322,6 +318,10 @@ ALTER TABLE `history`
 ALTER TABLE `resource`
   MODIFY `resource_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
+
+ALTER TABLE `task`
+  MODIFY `task_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- Constraints for dumped tables
 --
@@ -356,8 +356,8 @@ ALTER TABLE `resource`
 --
 ALTER TABLE `task`
   ADD CONSTRAINT `FK82ogu5quub0bhyuhp25riy7pf` FOREIGN KEY (`parent_id`) REFERENCES `task` (`task_id`),
-  ADD CONSTRAINT `FKio4h16n2qjj7hwuo2sp0u223m` FOREIGN KEY (`status`) REFERENCES `status` (`name`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FKmn1q28ckesniikwvnhsnao76j` FOREIGN KEY (`project_name`) REFERENCES `project` (`name`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FKio4h16n2qjj7hwuo2sp0u223m` FOREIGN KEY (`status`) REFERENCES `status` (`name`),
+  ADD CONSTRAINT `FKmn1q28ckesniikwvnhsnao76j` FOREIGN KEY (`project_name`) REFERENCES `project` (`name`);
 
 --
 -- Constraints for table `team_employee`
@@ -378,6 +378,7 @@ ALTER TABLE `team_resource`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `FK211dk0pe7l3aibwce8yy61ota` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -15,15 +15,16 @@ import java.util.List;
 @RestController
 @Slf4j
 @CrossOrigin
+@RequestMapping("projects/{projectName}")
 public class TaskController {
 
     @Autowired
     TaskServiceImpl taskService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/tasks", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<TaskResponse> getAllTasks() {
+    public List<TaskResponse> getAllTasks(@PathVariable String projectName) {
         log.info("GET /tasks");
-        return taskService.all();
+        return taskService.all(projectName);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/tasks/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -32,19 +33,19 @@ public class TaskController {
         return taskService.one(Long.parseLong(id));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/task/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.PUT, path = "/tasks/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public TaskResponse updateTask(@PathVariable String id, @RequestBody TaskRequest request) {
         log.info("PUT /tasks/" + id);
         return taskService.update(Long.parseLong(id), request);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/task", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public TaskResponse createTask(@RequestBody TaskRequest request) {
+    @RequestMapping(method = RequestMethod.POST, path = "/tasks", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public TaskResponse createTask(@PathVariable String projectName, @RequestBody TaskRequest request) {
         log.info("POST /task");
-        return taskService.create(request);
+        return taskService.create(request, projectName);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/task/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/tasks/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable String id) {
         log.info("DELETE /task" + id);
