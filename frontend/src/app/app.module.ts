@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './modules/material.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProjectsComponent } from './components/projects/projects.component';
@@ -16,6 +16,7 @@ import {AppEndpoints} from './services/app-endpoints.service';
 import {CustomerService} from './services/customer.service';
 import {ProjectService} from './services/project.service';
 import {TeamService} from './services/team.service';
+import { ProjectEditComponent } from './components/projects/project-edit/project-edit.component';
 
 
 @NgModule({
@@ -25,15 +26,18 @@ import {TeamService} from './services/team.service';
     ProjectsComponent,
     TeamsComponent,
     CustomersComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectEditComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
+  entryComponents: [ProjectEditComponent],
   providers: [AppEndpoints, CustomerService, ProjectService, TeamService],
   bootstrap: [AppComponent]
 })

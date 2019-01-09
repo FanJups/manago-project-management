@@ -16,4 +16,8 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     return this.httpClient.get<Project[]>(this.appEndpoints.go().projects(), {observe: 'body'});
   }
+
+  createProject(projectData: any): Observable<Project> {
+    return this.httpClient.post<Project>(this.appEndpoints.go().projects(), projectData, {responseType: 'json'});
+  }
 }

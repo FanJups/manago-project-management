@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>New Project</h1>
+<div mat-dialog>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput required [(ngModel)]="data.description" placeholder="Description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [formControl]="customersForm" placeholder="Customers" multiple>
+      <mat-option *ngFor="let customer of data.customers" [value]="customer" (onSelectionChange)="changedCustomer($event)">{{customer.firstName + " " + customer.lastName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Team">
+      <mat-option *ngFor="let team of data.teams" [value]="team" (onSelectionChange)="changedTeam($event)">
+        {{team.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>

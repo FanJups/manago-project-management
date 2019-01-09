@@ -3,6 +3,11 @@ import {ProjectService} from '../../services/project.service';
 import {Router} from '@angular/router';
 import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Project} from '../../models/project';
+import {ProjectEditComponent} from './project-edit/project-edit.component';
+import {Customer} from '../../models/customer';
+import {Team} from '../../models/team';
+import {CustomerService} from '../../services/customer.service';
+import {TeamService} from '../../services/team.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,10 +16,14 @@ import {Project} from '../../models/project';
 })
 export class ProjectsComponent implements OnInit {
   projects: MatTableDataSource<Project> = new MatTableDataSource();
+  customers: MatTableDataSource<Customer> = new MatTableDataSource();
+  teams: MatTableDataSource<Team> = new MatTableDataSource();
   displayedColumns = ['name', 'description', 'customers', 'teamName', 'edit', 'detail', 'delete'];
 
   constructor(
     private projectService: ProjectService,
+    private customerService: CustomerService,
+    private teamService: TeamService,
     private router: Router,
     public dialog: MatDialog,
     private snackbar: MatSnackBar
@@ -22,6 +31,8 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.getProjects();
+    this.getCustomers();
+    this.getTeams();
   }
 
   getProjects(): void {
@@ -30,5 +41,41 @@ export class ProjectsComponent implements OnInit {
       }
     );
     console.log(this.projects.data);
+  }
+
+  getCustomers(): void {
+    this.customerService.getCustomers().subscribe(resp => {
+      this.customers.data = resp;
+    });
+  }
+
+  getTeams(): void {
+    this.teamService.getTeams().subscribe(resp => {
+      this.teams.data = resp;
+    });
+  }
+
+  createProjectDialog(): void {
+    const dialogRef = this.dialog.open(ProjectEditComponent, {
+      width: '350px',
+      data: { name: '', description: '', customers: this.customers.data.slice(), teams: this.teams.data.slice(), customerIds: null, teamName: null}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.projectService.createProject({name: result.name, description: result.description, customerIds: result.customerIds, teamName: result.teamName})
+        .subscribe(resp => {
+          this.snackbar.open('Successfully created new project', '', {
+            duration: 2500
+          });
+        }, err => {
+          console.log(err)
+          this.snackbar.open('Could not create new project', '', {
+            duration: 2500
+          });
+        }, () => {
+          this.getProjects();
+        });
+    });
   }
 }
