@@ -106,9 +106,18 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: Project): void {
-    this.projectService.deleteProject(project.name).subscribe((resp) => {
-      console.log("DELETED!!!");
-      this.getProjects();
-    });
+    this.projectService.deleteProject(project.name)
+      .subscribe(resp => {
+        this.snackbar.open('Successfully removed project', '', {
+          duration: 2500
+        });
+      }, err => {
+        console.log(err)
+        this.snackbar.open('Could not remove project', '', {
+          duration: 2500
+        });
+      }, () => {
+        this.getProjects();
+      });
   }
 }

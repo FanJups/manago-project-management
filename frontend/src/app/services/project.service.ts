@@ -13,10 +13,6 @@ export class ProjectService {
   ) {
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   getProjects(): Observable<Project[]> {
     return this.httpClient.get<Project[]>(this.appEndpoints.go().projects(), {observe: 'body'});
   }
@@ -34,7 +30,6 @@ export class ProjectService {
   }
 
   deleteProject(projectName: string): Observable<any> {
-    console.log(this.appEndpoints.go().project(projectName));
     return this.httpClient.delete(this.appEndpoints.go().project(projectName));
   }
 }
