@@ -10,7 +10,7 @@ import {CustomersComponent} from '../components/customers/customers.component';
 
 const appRoutes: Routes = [
   {path: 'projects', component: ProjectsComponent},
-  {path: 'projects/:id', component: ProjectComponent},
+  {path: 'projects/:projectName', component: ProjectComponent},
   {path: 'teams', component: TeamsComponent},
   {path: 'customers', component: CustomersComponent},
   {path: '', redirectTo: '/projects', pathMatch: 'full'},

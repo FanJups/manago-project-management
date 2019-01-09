@@ -120,4 +120,8 @@ export class ProjectsComponent implements OnInit {
         this.getProjects();
       });
   }
+
+  showProject(project: Project): void {
+    this.router.navigate(['projects', project.name]);
+  }
 }
