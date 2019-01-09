@@ -41,7 +41,7 @@ import { CustomerComponent } from './components/customers/customer/customer.comp
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [ProjectEditComponent],
+  entryComponents: [ProjectEditComponent, CustomerEditComponent],
   providers: [AppEndpoints, CustomerService, ProjectService, TeamService],
   bootstrap: [AppComponent]
 })
