@@ -19,6 +19,12 @@ import {TeamService} from './services/team.service';
 import { ProjectEditComponent } from './components/projects/project-edit/project-edit.component';
 import { CustomerEditComponent } from './components/customers/customer-edit/customer-edit.component';
 import { CustomerComponent } from './components/customers/customer/customer.component';
+import { TeamComponent } from './components/teams/team/team.component';
+import { TeamEditComponent } from './components/teams/team-edit/team-edit.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskComponent } from './components/tasks/task/task.component';
+import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
+import {TaskService} from './services/task.service';
 
 
 @NgModule({
@@ -31,7 +37,12 @@ import { CustomerComponent } from './components/customers/customer/customer.comp
     ProjectComponent,
     ProjectEditComponent,
     CustomerEditComponent,
-    CustomerComponent
+    CustomerComponent,
+    TeamComponent,
+    TeamEditComponent,
+    TasksComponent,
+    TaskComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +52,8 @@ import { CustomerComponent } from './components/customers/customer/customer.comp
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [ProjectEditComponent, CustomerEditComponent],
-  providers: [AppEndpoints, CustomerService, ProjectService, TeamService],
+  entryComponents: [ProjectEditComponent, CustomerEditComponent, TaskEditComponent],
+  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

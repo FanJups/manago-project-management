@@ -1,0 +1,41 @@
+
+<mat-accordion>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Tasks
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-table #table [dataSource]="tasks">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let task"> {{task.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="taskId">
+          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+          <mat-cell *matCellDef="let task"> {{task.taskId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let task"> <mat-icon (click)="showTask(task)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let task"> <mat-icon (click)="editTaskDialog(task)">edit</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let task"> <mat-icon (click)="deleteTask(task)">delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -46,7 +46,7 @@ export class CustomersComponent implements OnInit {
       }, err => {
         console.log(err)
         this.snackbar.open(err, '', {
-          duration: 2500
+          duration: 10000
         });
       }, () => {
         this.getCustomers();
@@ -73,7 +73,7 @@ export class CustomersComponent implements OnInit {
         }, err => {
           console.log(err)
           this.snackbar.open(err, '', {
-            duration: 2500
+            duration: 10000
           });
         }, () => {
           this.getCustomers();
@@ -114,7 +114,7 @@ export class CustomersComponent implements OnInit {
         }, err => {
           console.log(err)
           this.snackbar.open(err, '', {
-            duration: 2500
+            duration: 10000
           });
         }, () => {
           this.getCustomers();

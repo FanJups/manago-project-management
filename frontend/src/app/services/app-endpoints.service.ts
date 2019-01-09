@@ -11,6 +11,8 @@ export class AppEndpoints {
     customers: () => `${this.host}/customers`,
     customer: (customerId) => `${this.host}/customers/${customerId}`,
     teams: () => `${this.host}/teams`,
+    tasks: (projectName) => `${this.host}/projects/${projectName}/tasks`,
+    task: (projectName, taskId) => `${this.host}/projects/${projectName}/tasks/${taskId}`,
   };
   go() {
     return this.paths;
