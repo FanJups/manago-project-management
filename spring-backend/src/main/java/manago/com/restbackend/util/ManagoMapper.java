@@ -1,14 +1,11 @@
 package manago.com.restbackend.util;
 
-import manago.com.restbackend.model.Customer;
-import manago.com.restbackend.model.Project;
-import manago.com.restbackend.model.Task;
-import manago.com.restbackend.model.Team;
+import manago.com.restbackend.model.*;
+import manago.com.restbackend.shared.request.CustomerRequest;
 import manago.com.restbackend.shared.request.ProjectRequest;
-import manago.com.restbackend.shared.response.CustomerResponse;
-import manago.com.restbackend.shared.response.ProjectResponse;
-import manago.com.restbackend.shared.response.TaskResponse;
-import manago.com.restbackend.shared.response.TeamResponse;
+import manago.com.restbackend.shared.request.StatusRequest;
+import manago.com.restbackend.shared.request.TaskRequest;
+import manago.com.restbackend.shared.response.*;
 import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -64,5 +61,27 @@ public class ManagoMapper {
             );
         }
         return resp;
+    }
+
+    public Task taskRequestToTask(TaskRequest request) {
+        return modelMapper.map(request, Task.class);
+    }
+
+    public Customer customerRequestToCustomer(CustomerRequest request) {
+        return modelMapper.map(request, Customer.class);
+    }
+
+    public Status statusRequestToStatus(StatusRequest request) {
+        return modelMapper.map(request, Status.class);
+    }
+
+    public EmployeeResponse employeeToEmployeeResponse(Employee employee) { return modelMapper.map(employee, EmployeeResponse.class); }
+
+    public UserResponse userToUserResponse(User user) { return modelMapper.map(user, UserResponse.class); }
+
+    public ResourceResponse resourceToResourceResponse(Resource resource) { return modelMapper.map(resource, ResourceResponse.class); }
+
+    public ResourceTypeResponse resourceTypeToResourceTypeResponse(ResourceType resourceType) {
+        return modelMapper.map(resourceType, ResourceTypeResponse.class);
     }
 }

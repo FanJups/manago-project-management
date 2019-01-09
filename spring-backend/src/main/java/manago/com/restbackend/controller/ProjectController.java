@@ -22,27 +22,32 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<ProjectResponse> getAllProjects() {
+        log.info("GET /projects");
         return projectService.all();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse getProject(@PathVariable String name) {
+        log.info("GET /projects/" + name);
         return projectService.one(name);
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse updateProject(@PathVariable String name, @RequestBody ProjectRequest request) {
+        log.info("PUT /projects/name");
         return projectService.update(name, request);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse createProject(@RequestBody ProjectRequest request) {
+        log.info("POST /projects");
         return projectService.create(request);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/projects/{name}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteProject(@PathVariable String name) {
+        log.info("DELETE /projects/" + name);
         projectService.delete(name);
     }
 }
