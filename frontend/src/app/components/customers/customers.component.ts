@@ -11,7 +11,7 @@ import {CustomerService} from '../../services/customer.service';
 })
 export class CustomersComponent implements OnInit {
   customers: MatTableDataSource<Customer> = new MatTableDataSource();
-  displayedColumns = ['customerId', 'firstName', 'lastName', 'email', 'company', 'address', 'zipCode', 'city', 'edit', 'detail', 'delete'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'company', 'address', 'zipCode', 'city', 'edit', 'detail', 'delete'];
 
   constructor(
     private customerService: CustomerService,
@@ -27,6 +27,11 @@ export class CustomersComponent implements OnInit {
   getCustomers(): void {
     this.customerService.getCustomers().subscribe(resp => {
       this.customers.data = resp;
+      this.customers.data = this.customers.data.sort((a, b) => {
+        if (a.lastName > b.lastName) return 1;
+        if (a.lastName === b.lastName) return 0;
+        return -1;
+      })
     });
   }
 

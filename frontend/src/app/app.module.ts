@@ -17,6 +17,8 @@ import {CustomerService} from './services/customer.service';
 import {ProjectService} from './services/project.service';
 import {TeamService} from './services/team.service';
 import { ProjectEditComponent } from './components/projects/project-edit/project-edit.component';
+import { CustomerEditComponent } from './components/customers/customer-edit/customer-edit.component';
+import { CustomerComponent } from './components/customers/customer/customer.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ProjectEditComponent } from './components/projects/project-edit/project
     TeamsComponent,
     CustomersComponent,
     ProjectComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    CustomerEditComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ export class AppEndpoints {
     project: (projectName) => `${this.host}/projects/${projectName}`,
     projects: () => `${this.host}/projects`,
     customers: () => `${this.host}/customers`,
+    customer: (customerId) => `${this.host}/customers/${customerId}`,
     teams: () => `${this.host}/teams`,
   };
   go() {

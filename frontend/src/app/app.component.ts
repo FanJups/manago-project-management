@@ -16,4 +16,12 @@ export class AppComponent {
   goBack() {
     this.router.navigate(['']);
   }
+
+  goToCustomers() {
+    this.router.navigate(['customers']);
+  }
+
+  goToTeams() {
+    this.router.navigate(['teams']);
+  }
 }
