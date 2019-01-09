@@ -20,32 +20,27 @@ public class ProjectController {
     @Autowired
     ProjectServiceImpl projectService;
 
-    @GetMapping
-    @RequestMapping(path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.GET, path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<ProjectResponse> getAllProjects() {
         return projectService.all();
     }
 
-    @GetMapping
-    @RequestMapping(path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.GET, path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse getProject(@PathVariable String name) {
         return projectService.one(name);
     }
 
-    @PutMapping
-    @RequestMapping(path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.PUT, path = "/projects/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse updateProject(@PathVariable String name, @RequestBody ProjectRequest request) {
         return projectService.update(name, request);
     }
 
-    @PostMapping
-    @RequestMapping(path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.POST, path = "/projects", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ProjectResponse createProject(@RequestBody ProjectRequest request) {
         return projectService.create(request);
     }
 
-    @DeleteMapping
-    @RequestMapping(path = "/projects/{name}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/projects/{name}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteProject(@PathVariable String name) {
         projectService.delete(name);
