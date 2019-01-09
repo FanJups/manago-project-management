@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
+import {Team} from '../../../models/team';
 
 @Component({
   selector: 'app-project-edit',
@@ -9,12 +10,22 @@ import {FormControl} from '@angular/forms';
 })
 export class ProjectEditComponent implements OnInit {
 
-  customersForm = new FormControl();
+  customersForm = new FormControl('valid', [
+  ]);
+  teamsForm = new FormControl('valid', [
+    Validators.required
+  ])
   currentIds = [];
+  teamModel: Team;
   constructor(public dialogRef: MatDialogRef<ProjectEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    this.data.customers = this.data.customers.sort((a,b) => {
+      if (a.lastName > b.lastName) return 1;
+      if (a.lastName === b.lastName) return 0;
+      return -1;
+    });
     this.currentIds = [];
   }
 

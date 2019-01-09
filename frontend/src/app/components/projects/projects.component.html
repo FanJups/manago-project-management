@@ -30,12 +30,12 @@
 
         <ng-container matColumnDef="detail">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon>more_horiz</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >edit</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon (click)="editProjectDialog(project)">edit</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">

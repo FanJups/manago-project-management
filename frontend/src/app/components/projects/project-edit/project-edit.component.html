@@ -12,11 +12,12 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Team">
+    <mat-select [formControl]="teamsForm" placeholder="Team" >
       <mat-option *ngFor="let team of data.teams" [value]="team" (onSelectionChange)="changedTeam($event)">
         {{team.name}}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="teamsForm.hasError('required')">You must make a selection</mat-error>
   </mat-form-field>
 
 </div>

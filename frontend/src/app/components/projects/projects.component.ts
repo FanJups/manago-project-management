@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit {
   createProjectDialog(): void {
     const dialogRef = this.dialog.open(ProjectEditComponent, {
       width: '350px',
-      data: { name: '', description: '', customers: this.customers.data.slice(), teams: this.teams.data.slice(), customerIds: null, teamName: null}
+      data: { edit: false, name: '', description: '', customers: this.customers.data.slice(), teams: this.teams.data.slice(), customerIds: null, teamName: null}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,6 +71,32 @@ export class ProjectsComponent implements OnInit {
         }, err => {
           console.log(err)
           this.snackbar.open('Could not create new project', '', {
+            duration: 2500
+          });
+        }, () => {
+          this.getProjects();
+        });
+    });
+  }
+
+  editProjectDialog(project: Project): void {
+    const dialogRef = this.dialog.open(ProjectEditComponent, {
+      width: '350px',
+      data: { edit: true, name: project.name, description: project.description, customers: this.customers.data.slice(), teams: this.teams.data.slice(), customerIds: project.customerResponses, teamName: project.teamResponse.name}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.projectService.updateProject(
+        {description: result.description, customerIds: result.customerIds, teamName: result.teamName},
+        result.name)
+        .subscribe(resp => {
+          this.snackbar.open('Successfully updated project', '', {
+            duration: 2500
+          });
+        }, err => {
+          console.log(err)
+          this.snackbar.open('Could not update project', '', {
             duration: 2500
           });
         }, () => {
