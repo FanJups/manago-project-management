@@ -38,7 +38,19 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer): void {
-
+    this.customerService.deleteCustomer(customer.customerId)
+      .subscribe(resp => {
+        this.snackbar.open('Successfully removed customer', '', {
+          duration: 2500
+        });
+      }, err => {
+        console.log(err)
+        this.snackbar.open(err, '', {
+          duration: 2500
+        });
+      }, () => {
+        this.getCustomers();
+      });
   }
 
   showCustomer(customer: Customer): void {
