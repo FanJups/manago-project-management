@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppEndpoints} from './app-endpoints.service';
 import {Observable} from 'rxjs/Observable';
 import {Project} from '../models/project';
@@ -12,6 +12,10 @@ export class ProjectService {
     private appEndpoints: AppEndpoints
   ) {
   }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   getProjects(): Observable<Project[]> {
     return this.httpClient.get<Project[]>(this.appEndpoints.go().projects(), {observe: 'body'});
@@ -27,6 +31,10 @@ export class ProjectService {
 
   updateProject(projectData: any, projectName: string): Observable<Project> {
     return this.httpClient.put<Project>(this.appEndpoints.go().project(projectName), projectData, {responseType: 'json'});
+  }
 
+  deleteProject(projectName: string): Observable<any> {
+    console.log(this.appEndpoints.go().project(projectName));
+    return this.httpClient.delete(this.appEndpoints.go().project(projectName));
   }
 }

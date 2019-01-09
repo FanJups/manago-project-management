@@ -40,7 +40,7 @@
 
         <ng-container matColumnDef="delete">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >delete</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon (click)="deleteProject(project)">delete</mat-icon> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

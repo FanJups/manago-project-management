@@ -104,4 +104,11 @@ export class ProjectsComponent implements OnInit {
         });
     });
   }
+
+  deleteProject(project: Project): void {
+    this.projectService.deleteProject(project.name).subscribe((resp) => {
+      console.log("DELETED!!!");
+      this.getProjects();
+    });
+  }
 }
