@@ -31,6 +31,9 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-list>
+          <button (click)="createSubTaskDialog()" mat-raised-button>
+            New Subtask
+          </button>
           <mat-table #table [dataSource]="subtasks">
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -42,10 +45,10 @@
               <mat-cell *matCellDef="let subtask"> {{subtask.taskId}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="detail">
-              <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
-              <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="showSubTask(subtask)">more_horiz</mat-icon> </mat-cell>
-            </ng-container>
+            <!--<ng-container matColumnDef="status">-->
+              <!--<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>-->
+              <!--<mat-cell *matCellDef="let subtask"> {{subtask.status.name}} </mat-cell>-->
+            <!--</ng-container>-->
 
             <ng-container matColumnDef="edit">
               <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>

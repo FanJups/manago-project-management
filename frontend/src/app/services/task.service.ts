@@ -19,7 +19,7 @@ export class TaskService {
     return this.httpClient.get<Task>(this.appEndpoints.go().task(projectName, taskName), {observe: 'body'});
   }
 
-  createTask(projectName: string, taskData: any): Observable<Task> {
+  createTask(taskData: any, projectName: string): Observable<Task> {
     return this.httpClient.post<Task>(this.appEndpoints.go().tasks(projectName), taskData, {responseType: 'json'});
   }
 

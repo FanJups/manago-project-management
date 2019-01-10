@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-task-edit',
@@ -7,7 +8,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: []
 })
 export class TaskEditComponent implements OnInit {
-
+  parentTaskForm = new FormControl('valid', [
+    Validators.required
+  ]);
   constructor(
     public dialogRef: MatDialogRef<TaskEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any

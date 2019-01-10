@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../../services/task.service';
 import {ProjectEditComponent} from '../projects/project-edit/project-edit.component';
 import {TaskEditComponent} from './task-edit/task-edit.component';
+import {CustomerEditComponent} from '../customers/customer-edit/customer-edit.component';
 
 @Component({
   selector: 'app-tasks',
@@ -13,7 +14,8 @@ import {TaskEditComponent} from './task-edit/task-edit.component';
 })
 export class TasksComponent implements OnInit {
   tasks: MatTableDataSource<Task> = new MatTableDataSource<Task>();
-  displayedColumns = ['taskId', 'subtaskCount', 'name' , 'edit', 'detail', 'delete'];
+  // displayedColumns = ['taskId', 'subtaskCount', 'name' , 'status', 'edit', 'detail', 'delete'];
+  displayedColumns = ['taskId', 'subtaskCount', 'name', 'edit', 'detail', 'delete'];
 
   constructor(
     private route: ActivatedRoute,
@@ -34,13 +36,17 @@ export class TasksComponent implements OnInit {
   editTaskDialog(task: Task): void {
     const dialogRef = this.dialog.open(TaskEditComponent, {
       width: '350px',
-      data: { edit: true, name: task.name, subtasks: task.subTaskResponses, status: task.status, subtaskResponses: '' }
+      data: { edit: true,
+        name: task.name,
+        status: task.status,
+        availableTasks: this.tasks.data.slice().filter(t => t.taskId !== task.taskId ),
+        availableStatuses: []}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.taskService.updateTask(
-        {name: result.name, subtaskResponses: result.subtaskResponses, status: result.status},
+        {name: result.name, subtaskResponses: task.subTaskResponses, status: result.status, parentId: task.parentId},
         this.route.params['value'].projectName,
         task.taskId.toString())
         .subscribe(resp => {
@@ -58,8 +64,32 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  createTaskDialog(task: Task): void {
+  createTaskDialog(): void {
+    const dialogRef = this.dialog.open(TaskEditComponent, {
+      width: '350px',
+      data: {  edit: false,
+        name: '',
+        status: '',
+        availableStatuses: []}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.taskService.createTask({name: result.name, subtaskResponses: [], status: result.status, parentId: null},
+        this.route.params['value'].projectName)
+        .subscribe(resp => {
+          this.snackbar.open('Successfully created new task', '', {
+            duration: 2500
+          });
+        }, err => {
+          console.log(err)
+          this.snackbar.open(err, '', {
+            duration: 10000
+          });
+        }, () => {
+          this.getTasks();
+        });
+    });
   }
 
   deleteTask(task: Task): void {

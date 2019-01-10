@@ -6,8 +6,13 @@
   <mat-form-field>
     <input matInput required placeholder="Status input here">
   </mat-form-field>
-  <mat-form-field>
-    <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
+  <mat-form-field *ngIf="data.subtask">
+    <mat-select [formControl]="parentTaskForm" placeholder="Team" >
+      <mat-option *ngFor="let task of data.availableTasks" [value]="task" (onSelectionChange)="changedTeam($event)">
+        {{task.taskId}} - {{task.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="parentTaskForm.hasError('required')">You must make a selection</mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

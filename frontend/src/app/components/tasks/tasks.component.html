@@ -8,6 +8,9 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-list>
+      <button (click)="createTaskDialog()" mat-raised-button>
+        New Task
+      </button>
       <mat-table #table [dataSource]="tasks">
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -18,6 +21,11 @@
           <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
           <mat-cell *matCellDef="let task"> {{task.taskId}} </mat-cell>
         </ng-container>
+
+        <!--<ng-container matColumnDef="status">-->
+          <!--<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let subtask"> {{subtask.status.name}} </mat-cell>-->
+        <!--</ng-container>-->
 
         <ng-container matColumnDef="subtaskCount">
           <mat-header-cell *matHeaderCellDef> Subtasks </mat-header-cell>
