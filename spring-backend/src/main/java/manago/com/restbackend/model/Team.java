@@ -46,4 +46,8 @@ public class Team implements Serializable {
     @JsonManagedReference
     Set<Resource> resources = new HashSet<>();
 
+    public void deleteEmployee(Employee employee) {
+        employees.remove(employee);
+    }
+
 }

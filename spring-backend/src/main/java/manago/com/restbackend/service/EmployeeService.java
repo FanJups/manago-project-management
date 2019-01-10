@@ -7,4 +7,5 @@ import java.util.List;
 public interface EmployeeService {
     List<EmployeeResponse> all();
     EmployeeResponse one(Long id);
+    void delete(Long id);
 }

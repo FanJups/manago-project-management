@@ -1,6 +1,7 @@
 package manago.com.restbackend.service.impl;
 
 import manago.com.restbackend.repository.EmployeeRepository;
+import manago.com.restbackend.repository.TeamRepository;
 import manago.com.restbackend.service.EmployeeService;
 import manago.com.restbackend.shared.response.EmployeeResponse;
 import manago.com.restbackend.util.ManagoMapper;
@@ -13,10 +14,12 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private TeamRepository teamRepository;
     private ManagoMapper mapper;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, ManagoMapper mapper) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, TeamRepository teamRepository, ManagoMapper mapper) {
         this.employeeRepository = employeeRepository;
+        this.teamRepository = teamRepository;
         this.mapper = mapper;
     }
 
@@ -31,5 +34,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public EmployeeResponse one(Long id) {
         return mapper.employeeToEmployeeResponse(employeeRepository.findByEmployeeId(id));
+    }
+
+    public void delete(Long id) {
+        teamRepository.findAll()
+                .stream()
+                .forEach(team -> team.deleteEmployee(employeeRepository.findByEmployeeId(id)));
+        employeeRepository.deleteById(id);
     }
 }
