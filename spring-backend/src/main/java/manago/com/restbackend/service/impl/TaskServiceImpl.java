@@ -47,16 +47,22 @@ public class TaskServiceImpl implements TaskService {
         return mapper.taskToTaskResponse(taskRepository.findByTaskId(id).get());
     }
 
+    private Task taskSetter(Task task, TaskRequest request) {
+        if(request.getParentId() == null) {
+            task.setParent(null);
+        } else {
+            if(taskRepository.findByTaskId(request.getParentId()).isPresent())
+                task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
+        }
+        task.setStatus(statusRepository.findByName(request.getStatusName()));
+        return task;
+    }
+
     @Override
     public TaskResponse update(long id, TaskRequest request) {
         Task task = taskRepository.findByTaskId(id).get();
         task.setName(request.getName());
-        if(request.getParentId() == null) {
-            task.setParent(null);
-        } else {
-            if(taskRepository.findByTaskId(request.getParentId()).isPresent()) task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
-        }
-        task.setStatus(statusRepository.findByName(request.getStatusName()));
+        task = taskSetter(task, request);
         taskRepository.save(task);
         return mapper.taskToTaskResponse(task);
     }
@@ -65,6 +71,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponse create(TaskRequest request, String projectName) {
         Task task = mapper.taskRequestToTask(request);
         task.setProject(projectRepository.findByName(projectName));
+        task = taskSetter(task, request);
         taskRepository.save(task);
         return mapper.taskToTaskResponse(task);
     }
