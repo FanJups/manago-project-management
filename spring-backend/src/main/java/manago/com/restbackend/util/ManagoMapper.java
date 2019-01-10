@@ -1,5 +1,6 @@
 package manago.com.restbackend.util;
 
+import lombok.extern.slf4j.Slf4j;
 import manago.com.restbackend.model.*;
 import manago.com.restbackend.shared.request.*;
 import manago.com.restbackend.shared.response.*;
@@ -11,6 +12,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 public class ManagoMapper {
 
@@ -42,7 +44,15 @@ public class ManagoMapper {
     }
 
     public TeamResponse teamToTeamResponse(Team team) {
-        return modelMapper.map(team, TeamResponse.class);
+        TeamResponse response = modelMapper.map(team, TeamResponse.class);
+        response.setEmployeeResponses(
+                team.getEmployees().stream().map(this::employeeToEmployeeResponse).collect(Collectors.toSet())
+        );
+        response.setResourceResponses(
+                team.getResources().stream().map(this::resourceToResourceResponse).collect(Collectors.toSet())
+        );
+
+        return response;
     }
 
     public TaskResponse taskToTaskResponse(Task task) {
@@ -93,5 +103,16 @@ public class ManagoMapper {
 
     public Employee employeeRequestToEmployee(EmployeeRequest request) {
         return modelMapper.map(request, Employee.class);
+    }
+
+    public Team teamRequestToTeam(TeamRequest request) {
+
+        Team team = modelMapper.map(request, Team.class);
+
+        return team;
+    }
+
+    public Resource resourceRequestToResource(ResourceRequest request) {
+        return modelMapper.map(request, Resource.class);
     }
 }

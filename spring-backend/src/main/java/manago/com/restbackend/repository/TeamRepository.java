@@ -10,4 +10,5 @@ public interface TeamRepository extends CrudRepository<Team, String> {
     @Override
     List<Team> findAll();
     Team findByName(String name);
+    void deleteByName(String name);
 }

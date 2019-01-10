@@ -2,15 +2,17 @@ package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import manago.com.restbackend.service.impl.TeamServiceImpl;
+import manago.com.restbackend.shared.request.TeamRequest;
 import manago.com.restbackend.shared.response.TeamResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.stream.MemoryCacheImageInputStream;
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @Slf4j
@@ -20,10 +22,35 @@ public class TeamController {
     @Autowired
     TeamServiceImpl teamService;
 
-    @GetMapping
-    @RequestMapping(path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = GET, path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<TeamResponse> getAllTeams() {
+        log.info("GET /teams");
         return teamService.all();
+    }
+
+    @RequestMapping(method = GET, path = "/teams/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public TeamResponse one(@PathVariable String name) {
+        log.info("GET /teams/" + name);
+        return teamService.one(name);
+    }
+
+    @RequestMapping(method = PUT, path = "/teams/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public TeamResponse updateTeam(@PathVariable String name, @RequestBody TeamRequest request) {
+        log.info("PUT /teams/" + name);
+        return teamService.updateTeam(name, request);
+    }
+
+    @RequestMapping(method = POST, path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public TeamResponse createTeam(@RequestBody TeamRequest request) {
+        log.info("POST /teams");
+        return teamService.createTeam(request);
+    }
+
+    @RequestMapping(method = DELETE, path = "/teams/{name}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteTeam(@PathVariable String name) {
+        log.info("DELETE /teams/" + name);
+        teamService.deleteTeam(name);
     }
 
 }
