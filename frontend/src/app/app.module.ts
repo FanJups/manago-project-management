@@ -25,6 +25,12 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskComponent } from './components/tasks/task/task.component';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import {TaskService} from './services/task.service';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { UsersComponent } from './components/users/users.component';
+import { ResourcesComponent } from './components/resources/resources.component';
+import { EmployeeComponent } from './components/employees/employee/employee.component';
+import { UserComponent } from './components/users/user/user.component';
+import { ResourceComponent } from './components/resources/resource/resource.component';
 
 
 @NgModule({
@@ -42,7 +48,13 @@ import {TaskService} from './services/task.service';
     TeamEditComponent,
     TasksComponent,
     TaskComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    EmployeesComponent,
+    UsersComponent,
+    ResourcesComponent,
+    EmployeeComponent,
+    UserComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,
