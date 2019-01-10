@@ -60,6 +60,9 @@ public class ManagoMapper {
                         .collect(Collectors.toSet())
             );
         }
+        if (task.getStatus() != null) {
+            resp.setStatusResponse(statusToStatusResponse(task.getStatus()));
+        }
         return resp;
     }
 
@@ -83,5 +86,9 @@ public class ManagoMapper {
 
     public ResourceTypeResponse resourceTypeToResourceTypeResponse(ResourceType resourceType) {
         return modelMapper.map(resourceType, ResourceTypeResponse.class);
+    }
+
+    public StatusResponse statusToStatusResponse(Status status) {
+        return modelMapper.map(status, StatusResponse.class);
     }
 }

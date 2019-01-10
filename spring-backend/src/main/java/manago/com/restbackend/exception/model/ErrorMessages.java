@@ -9,7 +9,8 @@ public enum ErrorMessages {
     RECORD_NOT_FOUND("Record was not found"),
     RECORD_NOT_CREATED("Could not create record"),
     RECORD_NOT_DELETED("Could not delete record"),
-    RECORD_NOT_UPDATED("Could not update record");
+    RECORD_NOT_UPDATED("Could not update record"),
+    TASK_HAS_SUBTASKS("Could not delete task. There are related subtasks.");
 
     private String errorMessage;
 

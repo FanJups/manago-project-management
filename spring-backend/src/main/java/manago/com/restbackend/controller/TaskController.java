@@ -48,7 +48,7 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.DELETE, path = "/tasks/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable String id) {
-        log.info("DELETE /task" + id);
+        log.info("DELETE /task/" + id);
         taskService.delete(Long.parseLong(id));
     }
 

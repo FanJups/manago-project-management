@@ -1,5 +1,6 @@
 package manago.com.restbackend.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import manago.com.restbackend.model.Status;
 import manago.com.restbackend.model.Task;
 import manago.com.restbackend.repository.ProjectRepository;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -79,6 +81,8 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void delete(long id) {
+        taskRepository.findAllByParent(taskRepository.findByTaskId(id).get())
+                .forEach(task -> taskRepository.deleteByTaskId(task.getTaskId()));
         taskRepository.deleteByTaskId(id);
     }
 }
