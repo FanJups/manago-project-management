@@ -30,7 +30,7 @@ export class CustomerService {
     return this.httpClient.put<Customer>(this.appEndpoints.go().customer(customerId), customerData, {responseType: 'json'});
   }
 
-  deleteCustomer(customerId: string): Observable<any> {
+  deleteCustomer(customerId: number): Observable<any> {
     return this.httpClient.delete(this.appEndpoints.go().customer(customerId));
   }
 }

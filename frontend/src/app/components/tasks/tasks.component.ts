@@ -11,7 +11,7 @@ import {TaskService} from '../../services/task.service';
 })
 export class TasksComponent implements OnInit {
   tasks: MatTableDataSource<Task> = new MatTableDataSource<Task>();
-  displayedColumns = ['taskId', 'name' , 'edit', 'detail', 'delete'];
+  displayedColumns = ['taskId', 'subtaskCount', 'name' , 'edit', 'detail', 'delete'];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class TasksComponent implements OnInit {
   }
 
   showTask(task: Task): void {
-
+    this.router.navigate(['projects', this.route.params['value'].projectName, 'tasks', task.taskId]);
   }
 
   editTaskDialog(task: Task): void {
@@ -43,6 +43,10 @@ export class TasksComponent implements OnInit {
       this.tasks.data = resp;
       console.log(this.tasks.data);
     });
+  }
+
+  getSubtaskLength(task: Task): number {
+    return task.subTaskResponses ? task.subTaskResponses.length : 0;
   }
 
 }

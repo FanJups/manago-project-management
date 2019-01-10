@@ -1,4 +1,5 @@
 
+<script src="tasks.component.ts"></script>
 <mat-accordion>
   <mat-expansion-panel expanded="true">
     <mat-expansion-panel-header>
@@ -16,6 +17,11 @@
         <ng-container matColumnDef="taskId">
           <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
           <mat-cell *matCellDef="let task"> {{task.taskId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="subtaskCount">
+          <mat-header-cell *matHeaderCellDef> Subtasks </mat-header-cell>
+          <mat-cell *matCellDef="let task"> {{getSubtaskLength(task)}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="detail">

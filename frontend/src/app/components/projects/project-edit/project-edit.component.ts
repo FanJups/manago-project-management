@@ -56,4 +56,8 @@ export class ProjectEditComponent implements OnInit {
     }
   }
 
+  getHeader(): string {
+    return this.data.edit ? "Edit " + this.data.name : "New Project";
+  }
+
 }
