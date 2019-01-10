@@ -24,4 +24,16 @@ export class AppComponent {
   goToTeams() {
     this.router.navigate(['teams']);
   }
+
+  goToUsers() {
+    this.router.navigate(['users']);
+  }
+
+  goToResources() {
+    this.router.navigate(['resources']);
+  }
+
+  goToEmployees() {
+    this.router.navigate(['employees']);
+  }
 }

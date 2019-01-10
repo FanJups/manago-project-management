@@ -31,6 +31,12 @@ import { ResourcesComponent } from './components/resources/resources.component';
 import { EmployeeComponent } from './components/employees/employee/employee.component';
 import { UserComponent } from './components/users/user/user.component';
 import { ResourceComponent } from './components/resources/resource/resource.component';
+import {EmployeeService} from './services/employee.service';
+import {ResourceService} from './services/resource.service';
+import {UserService} from './services/user.service';
+import { EmployeeEditComponent } from './components/employees/employee-edit/employee-edit.component';
+import { ResourceEditComponent } from './components/resources/resource-edit/resource-edit.component';
+import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -54,7 +60,10 @@ import { ResourceComponent } from './components/resources/resource/resource.comp
     ResourcesComponent,
     EmployeeComponent,
     UserComponent,
-    ResourceComponent
+    ResourceComponent,
+    EmployeeEditComponent,
+    ResourceEditComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,7 @@ import { ResourceComponent } from './components/resources/resource/resource.comp
     ReactiveFormsModule
   ],
   entryComponents: [ProjectEditComponent, CustomerEditComponent, TaskEditComponent],
-  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService],
+  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

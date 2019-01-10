@@ -5,6 +5,6 @@ export class Resource {
   public name: string;
   public cost: number;
   public manufacturer: number;
-  public boughtAt: Date;
+  public boughtAt: string;
   public resourceType: ResourceType;
 }

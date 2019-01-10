@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppEndpoints} from './app-endpoints.service';
 import {Observable} from 'rxjs/Observable';
-import {Customer} from '../models/customer';
+import {Resource} from '../models/resource';
 
 @Injectable()
 export class ResourceService {
@@ -12,23 +12,23 @@ export class ResourceService {
   ) {
   }
 
-  getCustomers(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>(this.appEndpoints.go().customers(), {observe: 'body'});
+  getResources(): Observable<Resource[]> {
+    return this.httpClient.get<Resource[]>(this.appEndpoints.go().resources(), {observe: 'body'});
   }
 
-  getCustomer(customerId: number): Observable<Customer> {
-    return this.httpClient.get<Customer>(this.appEndpoints.go().customer(customerId), {observe: 'body'});
+  getResource(resourceId: number): Observable<Resource> {
+    return this.httpClient.get<Resource>(this.appEndpoints.go().resource(resourceId), {observe: 'body'});
   }
 
-  createCustomer(customerData: any): Observable<Customer> {
-    return this.httpClient.post<Customer>(this.appEndpoints.go().customers(), customerData, {responseType: 'json'});
+  createResource(resourceData: any): Observable<Resource> {
+    return this.httpClient.post<Resource>(this.appEndpoints.go().resources(), resourceData, {responseType: 'json'});
   }
 
-  updateCustomer(customerData: any, customerId: number): Observable<Customer> {
-    return this.httpClient.put<Customer>(this.appEndpoints.go().customer(customerId), customerData, {responseType: 'json'});
+  updateResource(resourceData: any, resourceId: number): Observable<Resource> {
+    return this.httpClient.put<Resource>(this.appEndpoints.go().resource(resourceId), resourceData, {responseType: 'json'});
   }
 
-  deleteCustomer(customerId: number): Observable<any> {
-    return this.httpClient.delete(this.appEndpoints.go().customer(customerId));
+  deleteResource(resourceId: number): Observable<any> {
+    return this.httpClient.delete(this.appEndpoints.go().resource(resourceId));
   }
 }
