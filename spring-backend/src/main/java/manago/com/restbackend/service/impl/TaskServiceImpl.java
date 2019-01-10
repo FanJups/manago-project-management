@@ -56,7 +56,7 @@ public class TaskServiceImpl implements TaskService {
             if(taskRepository.findByTaskId(request.getParentId()).isPresent())
                 task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
         }
-        task.setStatus(statusRepository.findByName(request.getStatusName()));
+        task.setStatus(mapper.statusRequestToStatus(request.getStatusRequest()));
         return task;
     }
 

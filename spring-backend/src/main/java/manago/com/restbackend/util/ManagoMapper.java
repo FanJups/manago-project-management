@@ -67,7 +67,9 @@ public class ManagoMapper {
     }
 
     public Task taskRequestToTask(TaskRequest request) {
-        return modelMapper.map(request, Task.class);
+        Task task = modelMapper.map(request, Task.class);
+        task.setStatus(statusRequestToStatus(request.getStatusRequest()));
+        return task;
     }
 
     public Customer customerRequestToCustomer(CustomerRequest request) {
