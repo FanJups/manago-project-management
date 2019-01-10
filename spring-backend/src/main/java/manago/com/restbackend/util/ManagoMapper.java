@@ -1,10 +1,7 @@
 package manago.com.restbackend.util;
 
 import manago.com.restbackend.model.*;
-import manago.com.restbackend.shared.request.CustomerRequest;
-import manago.com.restbackend.shared.request.ProjectRequest;
-import manago.com.restbackend.shared.request.StatusRequest;
-import manago.com.restbackend.shared.request.TaskRequest;
+import manago.com.restbackend.shared.request.*;
 import manago.com.restbackend.shared.response.*;
 import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.modelmapper.ModelMapper;
@@ -92,5 +89,9 @@ public class ManagoMapper {
 
     public StatusResponse statusToStatusResponse(Status status) {
         return modelMapper.map(status, StatusResponse.class);
+    }
+
+    public Employee employeeRequestToEmployee(EmployeeRequest request) {
+        return modelMapper.map(request, Employee.class);
     }
 }
