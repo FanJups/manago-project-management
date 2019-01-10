@@ -11,6 +11,6 @@ public class TeamRequest {
     private String name;
     private Long size;
     private Double monthlyCost;
-    private Set<EmployeeRequest> employeeRequests;
-    private Set<ResourceRequest> resourceRequests;
+    private Set<Long> employeeIds;
+    private Set<Long> resourceIds;
 }

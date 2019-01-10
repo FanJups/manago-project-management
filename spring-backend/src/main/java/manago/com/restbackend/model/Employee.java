@@ -16,6 +16,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "employee")
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 5313493413859894407L;
@@ -35,9 +36,10 @@ public class Employee implements Serializable {
     private String employmentType;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "employees")
     @JsonBackReference
-    private Set<Team> teams = new HashSet<>();
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH},
+            mappedBy = "employees")
+    Set<Team> teams = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER,
         cascade = CascadeType.PERSIST,

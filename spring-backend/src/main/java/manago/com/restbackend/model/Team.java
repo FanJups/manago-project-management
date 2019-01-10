@@ -14,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name = "team")
 public class Team implements Serializable {
     private static final long serialVersionUID = 5313493413859894406L;
 
@@ -25,18 +26,18 @@ public class Team implements Serializable {
     private Double monthlyCost;
 
 
-    @ManyToMany(cascade = { CascadeType.PERSIST })
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @ToString.Exclude
+    @JsonManagedReference
     @JoinTable(
             name = "team_employee",
             joinColumns = { @JoinColumn(name = "name")},
             inverseJoinColumns = { @JoinColumn(name = "employee_id")}
     )
-    @ToString.Exclude
-    @JsonManagedReference
-    Set<Employee> employees = new HashSet<>();
+    private Set<Employee> employees = new HashSet<>();
 
 
-    @ManyToMany(cascade = { CascadeType.PERSIST })
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "team_resource",
             joinColumns = { @JoinColumn(name = "name")},
@@ -44,7 +45,7 @@ public class Team implements Serializable {
     )
     @ToString.Exclude
     @JsonManagedReference
-    Set<Resource> resources = new HashSet<>();
+    private Set<Resource> resources = new HashSet<>();
 
     public void addEmployee(Employee employee) {
         employees.add(employee);

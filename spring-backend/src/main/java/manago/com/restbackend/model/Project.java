@@ -28,8 +28,7 @@ public class Project implements Serializable {
     @NotNull
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH
-    })
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @ToString.Exclude
     @JsonManagedReference
     @JoinTable(

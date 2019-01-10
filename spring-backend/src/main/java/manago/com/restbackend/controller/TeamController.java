@@ -37,20 +37,20 @@ public class TeamController {
     @RequestMapping(method = PUT, path = "/teams/{name}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public TeamResponse updateTeam(@PathVariable String name, @RequestBody TeamRequest request) {
         log.info("PUT /teams/" + name);
-        return teamService.updateTeam(name, request);
+        return teamService.update(name, request);
     }
 
     @RequestMapping(method = POST, path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public TeamResponse createTeam(@RequestBody TeamRequest request) {
         log.info("POST /teams");
-        return teamService.createTeam(request);
+        return teamService.create(request);
     }
 
     @RequestMapping(method = DELETE, path = "/teams/{name}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteTeam(@PathVariable String name) {
         log.info("DELETE /teams/" + name);
-        teamService.deleteTeam(name);
+        teamService.delete(name);
     }
 
 }

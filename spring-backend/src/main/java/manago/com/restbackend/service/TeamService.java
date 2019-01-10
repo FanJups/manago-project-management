@@ -8,7 +8,7 @@ import java.util.List;
 public interface TeamService {
     List<TeamResponse> all();
     TeamResponse one(String id);
-    TeamResponse updateTeam(String id, TeamRequest request);
-    TeamResponse createTeam(TeamRequest request);
-    void deleteTeam(String id);
+    TeamResponse update(String id, TeamRequest request);
+    TeamResponse create(TeamRequest request);
+    void delete(String id);
 }
