@@ -23,7 +23,7 @@ export class TaskService {
     return this.httpClient.post<Task>(this.appEndpoints.go().tasks(projectName), taskData, {responseType: 'json'});
   }
 
-  updateTask(projectName: string, taskData: any, taskName: string): Observable<Task> {
+  updateTask(taskData: any, projectName: string, taskName: string): Observable<Task> {
     return this.httpClient.put<Task>(this.appEndpoints.go().task(projectName, taskName), taskData, {responseType: 'json'});
   }
 

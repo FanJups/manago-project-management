@@ -1,3 +1,16 @@
-<p>
-  task-edit works!
-</p>
+<h1 mat-dialog-title>{{getHeader()}}</h1>
+<div mat-dialog>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.name" placeholder="Task name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="Status input here">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>

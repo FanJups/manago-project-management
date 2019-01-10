@@ -41,7 +41,7 @@ export class TaskComponent implements OnInit {
   }
 
   showSubTask(subtask: Task): void {
-
+    this.router.navigate(['projects', this.route.params['value'].projectName, 'tasks', subtask.taskId]);
   }
 
   editSubTaskDialog(subtask: Task): void {

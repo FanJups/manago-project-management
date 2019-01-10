@@ -3,6 +3,8 @@ import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Task} from '../../models/task';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../../services/task.service';
+import {ProjectEditComponent} from '../projects/project-edit/project-edit.component';
+import {TaskEditComponent} from './task-edit/task-edit.component';
 
 @Component({
   selector: 'app-tasks',
@@ -30,11 +32,49 @@ export class TasksComponent implements OnInit {
   }
 
   editTaskDialog(task: Task): void {
+    const dialogRef = this.dialog.open(TaskEditComponent, {
+      width: '350px',
+      data: { edit: true, name: task.name, subtasks: task.subTaskResponses, status: task.status, subtaskResponses: '' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.taskService.updateTask(
+        {name: result.name, subtaskResponses: result.subtaskResponses, status: result.status},
+        this.route.params['value'].projectName,
+        task.taskId.toString())
+        .subscribe(resp => {
+          this.snackbar.open('Successfully updated project', '', {
+            duration: 2500
+          });
+        }, err => {
+          console.log(err)
+          this.snackbar.open('Could not update project', '', {
+            duration: 2500
+          });
+        }, () => {
+          this.getTasks();
+        });
+    });
+  }
+
+  createTaskDialog(task: Task): void {
 
   }
 
   deleteTask(task: Task): void {
-
+    this.taskService.deleteTask(this.route.params['value'].projectName, task.taskId.toString()).subscribe(resp => {
+      this.snackbar.open('Successfully removed task', '', {
+        duration: 2500
+      });
+    }, err => {
+      console.log(err);
+      this.snackbar.open(err, '', {
+        duration: 10000
+      });
+    }, () => {
+      this.getTasks();
+    });
   }
 
   getTasks(): void {
