@@ -15,6 +15,7 @@ import {UsersComponent} from '../components/users/users.component';
 import {EmployeeComponent} from '../components/employees/employee/employee.component';
 import {ResourceComponent} from '../components/resources/resource/resource.component';
 import {UserComponent} from '../components/users/user/user.component';
+import {TeamComponent} from '../components/teams/team/team.component';
 
 
 const appRoutes: Routes = [
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   {path: 'projects/:projectName/tasks', component: TasksComponent},
   {path: 'projects/:projectName/tasks/:taskId', component: TaskComponent},
   {path: 'teams', component: TeamsComponent},
+  {path: 'teams/:teamName', component: TeamComponent},
   {path: 'customers', component: CustomersComponent},
   {path: 'employees', component: EmployeesComponent},
   {path: 'resources', component: ResourcesComponent},

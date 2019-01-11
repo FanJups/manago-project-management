@@ -17,6 +17,7 @@ export class AppEndpoints {
     users: () => `${this.host}/users`,
     user: (username) => `${this.host}/users/${username}`,
     teams: () => `${this.host}/teams`,
+    team: (name) => `${this.host}/teams/${name}`,
     tasks: (projectName) => `${this.host}/projects/${projectName}/tasks`,
     task: (projectName, taskId) => `${this.host}/projects/${projectName}/tasks/${taskId}`,
   };
