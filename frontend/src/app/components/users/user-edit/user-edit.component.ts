@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Employee} from '../../../models/employee';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-user-edit',
@@ -9,6 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class UserEditComponent implements OnInit {
   employeeModel: Employee;
+  employeesForm = new FormControl('vaild');
   constructor(public dialogRef: MatDialogRef<UserEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -28,6 +30,10 @@ export class UserEditComponent implements OnInit {
     if(event.isUserInput) {
       this.data.employeeId = event.source.value.employeeId;
     }
+  }
+
+  getHeader(): string {
+    return this.data.edit ? "Edit " + this.data.username : "New User";
   }
 
 }

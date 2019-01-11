@@ -78,7 +78,7 @@ import {HistoryService} from './services/history.service';
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
+  entryComponents: [UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
   providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
   bootstrap: [AppComponent]
 })
