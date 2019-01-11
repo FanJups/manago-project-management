@@ -5,7 +5,13 @@
   </mat-form-field>
   <mat-form-field>
     <mat-select [formControl]="employeesForm" placeholder="Employees" multiple>
-      <mat-option *ngFor="let employee of data.availableEmployees" [value]="employee" (onSelectionChange)="changedEmployee($event)">{{employee.employeeId + " | " + employee.firstName + " " + employee.lastName}}</mat-option>
+      <mat-option *ngFor="let employee of data.availableEmployees" [value]="employee" (onSelectionChange)="changedEmployee($event)">{{employee.firstName + " " + employee.lastName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [formControl]="resourcesForm" placeholder="Resources" multiple>
+      <mat-option *ngFor="let resource of data.availableResources" [value]="resource" (onSelectionChange)="changedResource($event)">{{resource.name + " | " + resource.resourceType.name + " | " + resource.manufacturer}}</mat-option>
     </mat-select>
   </mat-form-field>
 
