@@ -20,6 +20,9 @@ export class AppEndpoints {
     team: (name) => `${this.host}/teams/${name}`,
     tasks: (projectName) => `${this.host}/projects/${projectName}/tasks`,
     task: (projectName, taskId) => `${this.host}/projects/${projectName}/tasks/${taskId}`,
+    history: (taskId) => `${this.host}/history/${taskId}`,
+    statuses: () => `${this.host}/statuses`,
+    status: (statusName) => `${this.host}/statuses/${statusName}`
   };
   go() {
     return this.paths;

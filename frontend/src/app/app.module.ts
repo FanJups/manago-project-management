@@ -37,6 +37,7 @@ import {UserService} from './services/user.service';
 import { EmployeeEditComponent } from './components/employees/employee-edit/employee-edit.component';
 import { ResourceEditComponent } from './components/resources/resource-edit/resource-edit.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
+import { StatusesComponent } from './components/statuses/statuses.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
     ResourceComponent,
     EmployeeEditComponent,
     ResourceEditComponent,
-    UserEditComponent
+    UserEditComponent,
+    StatusesComponent
   ],
   imports: [
     BrowserModule,
