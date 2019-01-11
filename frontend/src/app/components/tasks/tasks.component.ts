@@ -6,6 +6,8 @@ import {TaskService} from '../../services/task.service';
 import {ProjectEditComponent} from '../projects/project-edit/project-edit.component';
 import {TaskEditComponent} from './task-edit/task-edit.component';
 import {CustomerEditComponent} from '../customers/customer-edit/customer-edit.component';
+import {HistoryComponent} from '../history/history.component';
+import {HistoryService} from '../../services/history.service';
 
 @Component({
   selector: 'app-tasks',
@@ -14,15 +16,15 @@ import {CustomerEditComponent} from '../customers/customer-edit/customer-edit.co
 })
 export class TasksComponent implements OnInit {
   tasks: MatTableDataSource<Task> = new MatTableDataSource<Task>();
-  // displayedColumns = ['taskId', 'subtaskCount', 'name' , 'status', 'edit', 'detail', 'delete'];
-  displayedColumns = ['taskId', 'subtaskCount', 'name', 'edit', 'detail', 'delete'];
+  displayedColumns = ['taskId', 'subtaskCount', 'name' , 'status', 'history', 'edit', 'detail', 'delete'];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private historyService: HistoryService
   ) { }
 
   ngOnInit() {
@@ -117,6 +119,17 @@ export class TasksComponent implements OnInit {
 
   getSubtaskLength(task: Task): number {
     return task.subTaskResponses ? task.subTaskResponses.length : 0;
+  }
+
+  onHistoryClick(task: Task): void {
+    this.historyService.getHistory(task.taskId.toString()).subscribe(resp => {
+      const dialogRef = this.dialog.open(HistoryComponent, {
+        width: '500px',
+        data: {  edit: false,
+          history: new MatTableDataSource()}
+      });
+    });
+
   }
 
 }

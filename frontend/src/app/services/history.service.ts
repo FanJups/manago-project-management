@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppEndpoints} from './app-endpoints.service';
 import {Observable} from 'rxjs/Observable';
-import {History} from '../models/resource';
+import {History} from '../models/history';
 
 @Injectable()
 export class HistoryService {

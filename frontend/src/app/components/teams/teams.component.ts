@@ -62,7 +62,9 @@ export class TeamsComponent implements OnInit {
         employeeIds: [],
         resourceIds: [],
         availableResources: this.availableResources.slice(),
-        availableEmployees: this.availableEmployees.slice()}
+        availableEmployees: this.availableEmployees.slice(),
+        size: team.size,
+        monthlyCost: team.monthlyCost}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -72,6 +74,8 @@ export class TeamsComponent implements OnInit {
           name: team.name,
           employeeIds: result.employeeIds,
           resourceIds: result.resourceIds,
+          size: team.size,
+          monthlyCost: team.monthlyCost
         }, team.name)
         .subscribe(resp => {
           this.snackbar.open('Successfully updated team', '', {
@@ -97,7 +101,9 @@ export class TeamsComponent implements OnInit {
         employeeIds: [],
         resourceIds: [],
         availableResources: this.availableResources.slice(),
-        availableEmployees: this.availableEmployees.slice()
+        availableEmployees: this.availableEmployees.slice(),
+        size: 0,
+        monthlyCost: 0
       }
     });
 
@@ -107,6 +113,8 @@ export class TeamsComponent implements OnInit {
         name: result.name,
         employeeIds: result.employeeIds,
         resourceIds: result.resourceIds,
+        size: 0,
+        monthlyCost: 0
       })
         .subscribe(resp => {
           this.snackbar.open('Successfully created new team', '', {

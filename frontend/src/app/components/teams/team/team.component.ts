@@ -11,7 +11,7 @@ import {Resource} from '../../../models/resource';
 })
 export class TeamComponent implements OnInit {
   team: Team = new Team();
-  resourceDisplayedColumns = ['resourceId', 'name', 'resourceType', 'manufacturer', 'cost', 'boughtAt'];
+  resourceDisplayedColumns = [ 'name', 'resourceType', 'manufacturer', 'cost', 'boughtAt'];
   employeeDisplayedColumns = ['firstName', 'lastName', 'employmentType', 'salary'];
   constructor(
     private route: ActivatedRoute,

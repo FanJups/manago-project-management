@@ -38,6 +38,8 @@ import { EmployeeEditComponent } from './components/employees/employee-edit/empl
 import { ResourceEditComponent } from './components/resources/resource-edit/resource-edit.component';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import { StatusesComponent } from './components/statuses/statuses.component';
+import { HistoryComponent } from './components/history/history.component';
+import {HistoryService} from './services/history.service';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { StatusesComponent } from './components/statuses/statuses.component';
     EmployeeEditComponent,
     ResourceEditComponent,
     UserEditComponent,
-    StatusesComponent
+    StatusesComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -75,8 +78,8 @@ import { StatusesComponent } from './components/statuses/statuses.component';
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
-  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService],
+  entryComponents: [HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
+  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

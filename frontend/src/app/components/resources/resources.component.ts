@@ -14,7 +14,7 @@ import {ResourceType} from '../../models/resourceType';
 })
 export class ResourcesComponent implements OnInit {
   resources: MatTableDataSource<Resource> = new MatTableDataSource();
-  displayedColumns = ['resourceId', 'name', 'resourceType', 'manufacturer', 'cost', 'boughtAt', 'edit', 'detail', 'delete'];
+  displayedColumns = [ 'name', 'resourceType', 'manufacturer', 'cost', 'boughtAt', 'edit', 'detail', 'delete'];
   constructor(
     private resourceService: ResourceService,
     private router: Router,

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Task history</h1>
+<div mat-dialog>
+  <mat-table #table [dataSource]="data.history">
+    <ng-container matColumnDef="createdAt">
+      <mat-header-cell *matHeaderCellDef> Operation Date </mat-header-cell>
+      <mat-cell *matCellDef="let history"> {{history.createdAt}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="operationId">
+      <mat-header-cell *matHeaderCellDef> Operation Type </mat-header-cell>
+      <mat-cell *matCellDef="let history"> {{history.operationId}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

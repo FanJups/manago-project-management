@@ -22,10 +22,10 @@
           <mat-cell *matCellDef="let task"> {{task.taskId}} </mat-cell>
         </ng-container>
 
-        <!--<ng-container matColumnDef="status">-->
-          <!--<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>-->
-          <!--<mat-cell *matCellDef="let subtask"> {{subtask.status.name}} </mat-cell>-->
-        <!--</ng-container>-->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let subtask"> {{subtask.statusResponse.name}} </mat-cell>
+        </ng-container>
 
         <ng-container matColumnDef="subtaskCount">
           <mat-header-cell *matHeaderCellDef> Subtasks </mat-header-cell>
@@ -35,6 +35,11 @@
         <ng-container matColumnDef="detail">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
           <mat-cell class="narrow-column" *matCellDef="let task"> <mat-icon (click)="showTask(task)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="history">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> History </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="onHistoryClick(subtask)">history</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">

@@ -45,10 +45,15 @@
               <mat-cell *matCellDef="let subtask"> {{subtask.taskId}} </mat-cell>
             </ng-container>
 
-            <!--<ng-container matColumnDef="status">-->
-              <!--<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>-->
-              <!--<mat-cell *matCellDef="let subtask"> {{subtask.status.name}} </mat-cell>-->
-            <!--</ng-container>-->
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let subtask"> {{subtask.statusResponse.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="history">
+              <mat-header-cell class="narrow-column" *matHeaderCellDef> History </mat-header-cell>
+              <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="onHistoryClick(subtask)">history</mat-icon> </mat-cell>
+            </ng-container>
 
             <ng-container matColumnDef="edit">
               <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>

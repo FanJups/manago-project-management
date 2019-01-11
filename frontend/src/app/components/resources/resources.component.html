@@ -8,11 +8,6 @@
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table #table [dataSource]="resources">
-        <ng-container matColumnDef="resourceId">
-          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-          <mat-cell *matCellDef="let resource"> {{resource.resourceId}} </mat-cell>
-        </ng-container>
-
 
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>

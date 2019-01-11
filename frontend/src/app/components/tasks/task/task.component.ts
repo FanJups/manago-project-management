@@ -4,7 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../../services/project.service';
 import {TaskService} from '../../../services/task.service';
 import {TaskEditComponent} from '../task-edit/task-edit.component';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {HistoryComponent} from '../../history/history.component';
+import {HistoryService} from '../../../services/history.service';
 
 @Component({
   selector: 'app-task',
@@ -14,8 +16,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 export class TaskComponent implements OnInit {
   task: Task = new Task();
   subtasks: Task[];
-  // displayedColumns = ['taskId', 'name' , 'status', 'edit', 'delete'];
-  displayedColumns = ['taskId', 'name' , 'edit', 'delete'];
+  displayedColumns = ['taskId', 'name' , 'status', 'history', 'edit', 'delete'];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,8 @@ export class TaskComponent implements OnInit {
     private taskService: TaskService,
     private router: Router,
     public dialog: MatDialog,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private historyService: HistoryService
   ) { }
 
   ngOnInit() {
@@ -110,6 +112,16 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  onHistoryClick(task: Task): void {
+    this.historyService.getHistory(task.taskId.toString()).subscribe(resp => {
+      const dialogRef = this.dialog.open(HistoryComponent, {
+        width: '500px',
+        data: {  edit: false,
+          history: new MatTableDataSource()}
+      });
+    });
+  }
+
   deleteSubTask(subtask: Task): void {
     this.taskService.deleteTask(this.route.params['value'].projectName,
       subtask.taskId.toString()).subscribe(resp => {
@@ -117,7 +129,7 @@ export class TaskComponent implements OnInit {
         duration: 2500
       });
     }, err => {
-      console.log(err)
+      console.log(err);
       this.snackbar.open(err, '', {
         duration: 10000
       });

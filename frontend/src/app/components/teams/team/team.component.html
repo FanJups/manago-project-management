@@ -25,12 +25,6 @@
         </mat-expansion-panel-header>
         <mat-list>
           <mat-table #table [dataSource]="team.resourceResponses">
-            <ng-container matColumnDef="resourceId">
-              <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-              <mat-cell *matCellDef="let resource"> {{resource.resourceId}} </mat-cell>
-            </ng-container>
-
-
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
               <mat-cell *matCellDef="let resource"> {{resource.name}} </mat-cell>
