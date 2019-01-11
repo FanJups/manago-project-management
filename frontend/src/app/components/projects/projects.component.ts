@@ -113,7 +113,7 @@ export class ProjectsComponent implements OnInit {
         });
       }, err => {
         console.log(err)
-        this.snackbar.open('Could not remove project', '', {
+        this.snackbar.open(err, '', {
           duration: 10000
         });
       }, () => {

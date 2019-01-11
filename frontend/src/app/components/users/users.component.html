@@ -1,3 +1,47 @@
-<p>
-  users works!
-</p>
+<mat-card>
+  <mat-card-title>Users</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createUserDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="users">
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="employeeId">
+          <mat-header-cell *matHeaderCellDef> Employee Id </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.employeeId}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let user"> <mat-icon (click)="showUser(user)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let user"> <mat-icon (click)="editUserDialog(user)" >edit</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let user"> <mat-icon (click)="deleteUser(user)" >delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+

@@ -73,7 +73,7 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [ProjectEditComponent, CustomerEditComponent, TaskEditComponent],
+  entryComponents: [ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent],
   providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService],
   bootstrap: [AppComponent]
 })
