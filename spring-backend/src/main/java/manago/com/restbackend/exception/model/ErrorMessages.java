@@ -12,7 +12,8 @@ public enum ErrorMessages {
     RECORD_NOT_UPDATED("Could not update record"),
     TASK_HAS_SUBTASKS("Could not delete task. There are related subtasks."),
     STATUS_IN_USE("Could not delete status that is currently in use."),
-    EMPLOYEE_NOT_FOUND("Could not find employee.");
+    EMPLOYEE_NOT_FOUND("Could not find employee."),
+    STATUS_NOT_FOUND("Could not find status.");
 
     private String errorMessage;
 

@@ -1,6 +1,7 @@
 package manago.com.restbackend.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import manago.com.restbackend.exception.model.ErrorMessages;
 import manago.com.restbackend.model.Status;
 import manago.com.restbackend.model.Task;
 import manago.com.restbackend.repository.ProjectRepository;
@@ -56,7 +57,12 @@ public class TaskServiceImpl implements TaskService {
             if(taskRepository.findByTaskId(request.getParentId()).isPresent())
                 task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
         }
-        task.setStatus(mapper.statusRequestToStatus(request.getStatusRequest()));
+
+        Status status = statusRepository.findByName(request.getStatusRequest().getName());
+        if(status == null)
+            throw new RuntimeException(ErrorMessages.STATUS_NOT_FOUND.getErrorMessage());
+        task.setStatus(status);
+
         return task;
     }
 
