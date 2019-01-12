@@ -12,6 +12,7 @@ import manago.com.restbackend.shared.request.TaskRequest;
 import manago.com.restbackend.shared.response.TaskResponse;
 import manago.com.restbackend.shared.response.TeamResponse;
 import manago.com.restbackend.util.ManagoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class TaskServiceImpl implements TaskService {
+
+    @Autowired
+    private HistoryServiceImpl historyService;
 
     private TaskRepository taskRepository;
     private ProjectRepository projectRepository;
@@ -72,15 +76,19 @@ public class TaskServiceImpl implements TaskService {
         task.setName(request.getName());
         task = taskSetter(task, request);
         taskRepository.save(task);
+        historyService.addHistory(id, "Task Updated");
         return mapper.taskToTaskResponse(task);
     }
 
     @Override
     public TaskResponse create(TaskRequest request, String projectName) {
+
         Task task = mapper.taskRequestToTask(request);
         task.setProject(projectRepository.findByName(projectName));
         task = taskSetter(task, request);
         taskRepository.save(task);
+        task = mapper.taskRequestToTask(request);
+        historyService.addHistory(task.getTaskId(), "Task Created");
         return mapper.taskToTaskResponse(task);
     }
 
@@ -89,6 +97,7 @@ public class TaskServiceImpl implements TaskService {
     public void delete(long id) {
         taskRepository.findAllByParent(taskRepository.findByTaskId(id))
                 .forEach(task -> taskRepository.deleteByTaskId(task.getTaskId()));
+        historyService.addHistory(id, "Task Deleted");
         taskRepository.deleteByTaskId(id);
     }
 }

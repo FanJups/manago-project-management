@@ -1,7 +1,9 @@
 package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import manago.com.restbackend.model.History;
 import manago.com.restbackend.model.Task;
+import manago.com.restbackend.service.impl.HistoryServiceImpl;
 import manago.com.restbackend.service.impl.TaskServiceImpl;
 import manago.com.restbackend.shared.request.TaskRequest;
 import manago.com.restbackend.shared.response.TaskResponse;

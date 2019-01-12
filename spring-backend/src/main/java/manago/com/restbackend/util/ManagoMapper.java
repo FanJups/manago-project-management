@@ -134,4 +134,8 @@ public class ManagoMapper {
     public User userRequestToUser(UserRequest request) {
         return modelMapper.map(request, User.class);
     }
+
+    public HistoryResponse historyToHistoryResponse(History history) {
+        return modelMapper.map(history, HistoryResponse.class);
+    }
 }
