@@ -14,7 +14,8 @@ public enum ErrorMessages {
     STATUS_IN_USE("Could not delete status that is currently in use"),
     EMPLOYEE_NOT_FOUND("Could not find employee"),
     STATUS_NOT_FOUND("Could not find status"),
-    RESOURCE_TYPE_NOT_FOUND("Could not find resource type");
+    RESOURCE_TYPE_NOT_FOUND("Could not find resource type"),
+    PARENT_NOT_EXISTS("Could not find parent");
 
     private String errorMessage;
 

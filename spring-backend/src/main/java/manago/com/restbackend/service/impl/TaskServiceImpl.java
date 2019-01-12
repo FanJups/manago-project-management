@@ -58,8 +58,10 @@ public class TaskServiceImpl implements TaskService {
         if(request.getParentId() == null) {
             task.setParent(null);
         } else {
-            if(taskRepository.findByTaskId(request.getParentId()) != null)
-                task.setParent(taskRepository.findByTaskId(request.getParentId()));
+            Task parent = taskRepository.findByTaskId(request.getParentId());
+            if(parent == null)
+                throw new RuntimeException(ErrorMessages.PARENT_NOT_EXISTS.getErrorMessage());
+            task.setParent(taskRepository.findByTaskId(request.getParentId()));
         }
 
         Status status = statusRepository.findByName(request.getStatusRequest().getName());
@@ -82,14 +84,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponse create(TaskRequest request, String projectName) {
-        if(taskRepository.findByTaskId(request.getTaskId()) != null)
-            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
+        log.info("Request parent id: " + request.getParentId());
 
         Task task = mapper.taskRequestToTask(request);
         task.setProject(projectRepository.findByName(projectName));
         task = taskSetter(task, request);
+        task.setTaskId(null);
         taskRepository.save(task);
-        task = mapper.taskRequestToTask(request);
+
+        log.info("Task id: " + task.getTaskId());
         historyService.addHistory(task.getTaskId(), "Task Created");
         return mapper.taskToTaskResponse(task);
     }
