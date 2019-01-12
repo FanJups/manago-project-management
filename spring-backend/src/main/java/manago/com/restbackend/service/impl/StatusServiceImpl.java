@@ -1,6 +1,7 @@
 package manago.com.restbackend.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import manago.com.restbackend.exception.model.ErrorMessages;
 import manago.com.restbackend.model.Status;
 import manago.com.restbackend.repository.StatusRepository;
 import manago.com.restbackend.service.StatusService;
@@ -40,6 +41,15 @@ public class StatusServiceImpl implements StatusService {
 
     public void delete(String name) {
         Status status = statusRepository.findByName(name);
-        statusRepository.delete(status);
+        if (status == null)
+            throw new RuntimeException(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
+        else {
+            try {
+                statusRepository.delete(status);
+            }
+            catch (Exception e){
+                throw new RuntimeException(ErrorMessages.STATUS_IN_USE.getErrorMessage());
+            }
+        }
     }
 }
