@@ -59,31 +59,46 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamResponse update(String name, TeamRequest request) {
         Team team = teamRepository.findByName(name);
+
         if (team == null)
-            throw new RuntimeException(ErrorMessages.RECORD_NOT_UPDATED.getErrorMessage());
+            throw new RuntimeException(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
+
         else {
-            team.setSize(request.getSize());
-            team.setMonthlyCost(request.getMonthlyCost());
+            if(request.getSize() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else
+                team.setSize(request.getSize());
+            if(request.getMonthlyCost() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else
+                team.setMonthlyCost(request.getMonthlyCost());
 
             resetTeamEmployees(team);
             getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
             resetTeamResources(team);
             getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
 
-            teamRepository.save(team);
+            try {
+                teamRepository.save(team);
+            } catch (Exception e) {
+                throw new RuntimeException(ErrorMessages.RECORD_NOT_UPDATED.getErrorMessage());
+            }
+
             return mapper.teamToTeamResponse(team);
         }
     }
 
     @Override
     public TeamResponse create(TeamRequest request) {
+
         if (teamRepository.findByName(request.getName()) != null)
             throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
+
         else {
             Team team = mapper.teamRequestToTeam(request);
 
             getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
-            //getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
+            getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
 
             teamRepository.save(team);
             return mapper.teamToTeamResponse(team);
