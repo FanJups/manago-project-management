@@ -97,7 +97,14 @@ public class ManagoMapper {
 
     public EmployeeResponse employeeToEmployeeResponse(Employee employee) { return modelMapper.map(employee, EmployeeResponse.class); }
 
-    public UserResponse userToUserResponse(User user) { return modelMapper.map(user, UserResponse.class); }
+    public UserResponse userToUserResponse(User user) {
+        UserResponse response = modelMapper.map(user, UserResponse.class);
+        if(user.getEmployee() == null)
+            response.setEmployeeResponse(null);
+        else
+            response.setEmployeeResponse(modelMapper.map(user.getEmployee(), EmployeeResponse.class));
+        return response;
+    }
 
     public ResourceResponse resourceToResourceResponse(Resource resource) { return modelMapper.map(resource, ResourceResponse.class); }
 
@@ -122,5 +129,9 @@ public class ManagoMapper {
 
     public Resource resourceRequestToResource(ResourceRequest request) {
         return modelMapper.map(request, Resource.class);
+    }
+
+    public User userRequestToUser(UserRequest request) {
+        return modelMapper.map(request, User.class);
     }
 }
