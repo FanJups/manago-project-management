@@ -69,18 +69,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void delete(Long id) {
         if (employeeRepository.findByEmployeeId(id) == null)
             throw new RuntimeException(ErrorMessages.RECORD_NOT_DELETED.getErrorMessage());
-        else {
-            //Delete all information about employee in teams
-            teamRepository.findAll()
-                    .forEach(team -> team.deleteEmployee(employeeRepository.findByEmployeeId(id)));
+        //Delete all information about employee in teams
+        teamRepository.findAll()
+                .forEach(team -> team.deleteEmployee(employeeRepository.findByEmployeeId(id)));
 
-            //Delete all information about employee in users
-            userRepository.findAllByEmployee(employeeRepository.findByEmployeeId(id))
-                    .forEach(user -> {
-                        user.setEmployee(null);
-                        userRepository.save(user);
-                    });
-            employeeRepository.deleteById(id);
-        }
+        //Delete all information about employee in users
+        userRepository.findAllByEmployee(employeeRepository.findByEmployeeId(id))
+                .forEach(user -> {
+                    user.setEmployee(null);
+                    userRepository.save(user);
+                });
+        employeeRepository.deleteById(id);
     }
 }

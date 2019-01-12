@@ -61,4 +61,6 @@ public class Team implements Serializable {
         employees.remove(employee);
     }
 
+    public void deleteResource(Resource resource) { resources.remove(resource); }
+
 }

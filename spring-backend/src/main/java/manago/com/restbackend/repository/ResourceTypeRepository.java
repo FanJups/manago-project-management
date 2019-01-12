@@ -8,4 +8,5 @@ import java.util.List;
 public interface ResourceTypeRepository extends CrudRepository<ResourceType, String> {
     @Override
     List<ResourceType> findAll();
+    ResourceType findByName(String name);
 }
