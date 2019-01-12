@@ -48,7 +48,9 @@ public class Team implements Serializable {
     private Set<Resource> resources = new HashSet<>();
 
     public void addEmployee(Employee employee) {
-        employees.add(employee);
+
+        this.getEmployees().add(employee);
+        employee.getTeams().add(this);
     }
 
     public void addResource(Resource resource) {

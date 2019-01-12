@@ -83,7 +83,7 @@ public class TeamServiceImpl implements TeamService {
             Team team = mapper.teamRequestToTeam(request);
 
             getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
-            getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
+            //getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
 
             teamRepository.save(team);
             return mapper.teamToTeamResponse(team);
