@@ -34,6 +34,8 @@ public class StatusServiceImpl implements StatusService {
     }
 
     public StatusResponse create(StatusRequest request) {
+        if(statusRepository.findByName(request.getName()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
         Status status = mapper.statusRequestToStatus(request);
         statusRepository.save(status);
         return mapper.statusToStatusResponse(status);

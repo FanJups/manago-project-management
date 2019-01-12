@@ -61,6 +61,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public EmployeeResponse createEmployee(EmployeeRequest request) {
+        if(employeeRepository.findByEmployeeId(request.getEmployeeId()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
         Employee employee = mapper.employeeRequestToEmployee(request);
         employeeRepository.save(employee);
         return mapper.employeeToEmployeeResponse(employee);

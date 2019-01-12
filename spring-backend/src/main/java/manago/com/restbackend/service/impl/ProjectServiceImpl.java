@@ -71,6 +71,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponse create(ProjectRequest request) {
+        if(projectRepository.findByName(request.getName()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
         Project project = mapper.projectRequestToProject(request);
         getCustomersByIds(request.getCustomerIds()).forEach(project::addCustomer);
         Stream.of(getTeamByName(request.getTeamName())).forEach(project::setTeam);

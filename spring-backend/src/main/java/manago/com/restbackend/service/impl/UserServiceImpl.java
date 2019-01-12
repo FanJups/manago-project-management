@@ -56,6 +56,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserResponse create(UserRequest request) {
+        if(userRepository.findByUsername(request.getUsername()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
         User user = mapper.userRequestToUser(request);
 
         Employee employee = employeeRepository.findByEmployeeId(request.getEmployeeId());

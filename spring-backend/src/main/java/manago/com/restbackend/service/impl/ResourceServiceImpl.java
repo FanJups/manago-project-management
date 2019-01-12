@@ -90,6 +90,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     public ResourceResponse create(ResourceRequest request) {
+        if(resourceRepository.findByResourceId(request.getResourceId()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
         Resource resource = mapper.resourceRequestToResource(request);
         checkMissingFields(request);
 

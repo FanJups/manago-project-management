@@ -82,6 +82,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponse create(TaskRequest request, String projectName) {
+        if(taskRepository.findByTaskId(request.getTaskId()) != null)
+            throw new RuntimeException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
 
         Task task = mapper.taskRequestToTask(request);
         task.setProject(projectRepository.findByName(projectName));
