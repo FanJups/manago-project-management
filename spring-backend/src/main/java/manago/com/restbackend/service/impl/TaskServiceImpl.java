@@ -47,15 +47,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponse one(long id) {
-        return mapper.taskToTaskResponse(taskRepository.findByTaskId(id).get());
+        return mapper.taskToTaskResponse(taskRepository.findByTaskId(id));
     }
 
     private Task taskSetter(Task task, TaskRequest request) {
         if(request.getParentId() == null) {
             task.setParent(null);
         } else {
-            if(taskRepository.findByTaskId(request.getParentId()).isPresent())
-                task.setParent(taskRepository.findByTaskId(request.getParentId()).get());
+            if(taskRepository.findByTaskId(request.getParentId()) != null)
+                task.setParent(taskRepository.findByTaskId(request.getParentId()));
         }
 
         Status status = statusRepository.findByName(request.getStatusRequest().getName());
@@ -68,7 +68,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskResponse update(long id, TaskRequest request) {
-        Task task = taskRepository.findByTaskId(id).get();
+        Task task = taskRepository.findByTaskId(id);
         task.setName(request.getName());
         task = taskSetter(task, request);
         taskRepository.save(task);
@@ -87,7 +87,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void delete(long id) {
-        taskRepository.findAllByParent(taskRepository.findByTaskId(id).get())
+        taskRepository.findAllByParent(taskRepository.findByTaskId(id))
                 .forEach(task -> taskRepository.deleteByTaskId(task.getTaskId()));
         taskRepository.deleteByTaskId(id);
     }

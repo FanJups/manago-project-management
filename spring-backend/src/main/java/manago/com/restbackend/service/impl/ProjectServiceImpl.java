@@ -1,5 +1,6 @@
 package manago.com.restbackend.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import manago.com.restbackend.exception.model.ErrorMessage;
 import manago.com.restbackend.exception.model.ErrorMessages;
 import manago.com.restbackend.model.Customer;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@Slf4j
 public class ProjectServiceImpl implements ProjectService {
 
     private ProjectRepository projectRepository;
@@ -80,22 +82,47 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public void delete(String name) {
         Project project = projectRepository.findByName(name);
+        if(project == null)
+            throw new RuntimeException(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
+
         project.setCustomers(null);
         project.setTeam(null);
 
-        List<Task> tasks = taskRepository.findAll()
-                .stream()
-                .filter(i -> i.getProject().getName() == name)
-                .collect(Collectors.toList());
-        tasks.stream()
-                .filter(i -> i.getParent() != null)
-                .forEach(i -> taskRepository.deleteByTaskId(i.getTaskId()));
-        tasks.stream()
-                .filter(i -> i.getParent() == null)
-                .forEach(i -> taskRepository.deleteByTaskId(i.getTaskId()));
+        try {
+            List<Long> taskIds = taskRepository
+                    .findAllByProject(project)
+                    .stream()
+                    .map(t -> t.getTaskId())
+                    .collect(Collectors.toList());
+
+            try {
+                for (Iterator<Long> iter = taskIds.iterator(); iter.hasNext();){
+                    Long id = iter.next();
+                    if(taskRepository.findByTaskId(id).getParent() != null) {
+                        taskRepository.deleteByTaskId(id);
+                        iter.remove();
+                    }
+                }
+                for (Iterator<Long> iter = taskIds.iterator(); iter.hasNext();){
+                    Long id = iter.next();
+                    taskRepository.deleteByTaskId(id);
+                    iter.remove();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(ErrorMessages.STATUS_NOT_FOUND.getErrorMessage());
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(ErrorMessages.STATUS_IN_USE.getErrorMessage());
+        }
 
         projectRepository.save(project);
-        projectRepository.deleteByName(name);
+
+        try {
+            projectRepository.deleteByName(name);
+        } catch (Exception e) {
+            throw new RuntimeException(ErrorMessages.RECORD_NOT_DELETED.getErrorMessage());
+        }
     }
 
     private Set<Customer> getCustomersByIds(Set<Long> ids) {
