@@ -45,6 +45,14 @@ public class ManagoMapper {
 
     public TeamResponse teamToTeamResponse(Team team) {
         TeamResponse response = modelMapper.map(team, TeamResponse.class);
+
+        if (team.getSize() == null)
+            response.setSize(0L);
+
+        if (team.getMonthlyCost() == null)
+            response.setMonthlyCost(0.0);
+
+
         response.setEmployeeResponses(
                 team.getEmployees().stream().map(this::employeeToEmployeeResponse).collect(Collectors.toSet())
         );

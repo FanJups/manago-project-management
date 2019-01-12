@@ -73,10 +73,19 @@ public class TeamServiceImpl implements TeamService {
             else
                 team.setMonthlyCost(request.getMonthlyCost());
 
-            resetTeamEmployees(team);
-            getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
-            resetTeamResources(team);
-            getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
+            if(request.getEmployeeIds() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else {
+                resetTeamEmployees(team);
+                getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
+            }
+
+            if(request.getResourceIds() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else {
+                resetTeamResources(team);
+                getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
+            }
 
             try {
                 teamRepository.save(team);
@@ -97,8 +106,19 @@ public class TeamServiceImpl implements TeamService {
         else {
             Team team = mapper.teamRequestToTeam(request);
 
-            getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
-            getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
+            if(team.getSize() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            if(team.getMonthlyCost() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            if(request.getEmployeeIds() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else
+                getEmployeesByIds(request.getEmployeeIds()).forEach(team::addEmployee);
+
+            if(request.getResourceIds() == null)
+                throw new RuntimeException(ErrorMessages.MISSING_FIELD.getErrorMessage());
+            else
+                getResourcesByIds(request.getResourceIds()).forEach(team::addResource);
 
             teamRepository.save(team);
             return mapper.teamToTeamResponse(team);
