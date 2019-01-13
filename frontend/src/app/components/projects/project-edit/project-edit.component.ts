@@ -34,7 +34,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   isInvalid(): boolean {
-    return false;
+    return this.data.name.length < 1;
   }
 
   changedCustomer(event: any): void {

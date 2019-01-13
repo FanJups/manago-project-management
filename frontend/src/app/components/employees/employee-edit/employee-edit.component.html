@@ -1,4 +1,4 @@
-<script src="employee-edit.component.ts"></script><h1 mat-dialog-title>New Employee</h1>
+<h1 mat-dialog-title>{{getHeader()}}</h1>
 <div mat-dialog>
   <mat-form-field>
     <input matInput required [(ngModel)]="data.firstName" placeholder="First Name">

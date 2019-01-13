@@ -4,7 +4,7 @@
     <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput required [(ngModel)]="data.description" placeholder="Description"></textarea>
+    <textarea matInput [(ngModel)]="data.description" placeholder="Description"></textarea>
   </mat-form-field>
   <mat-form-field>
     <mat-select [formControl]="customersForm" placeholder="Customers" multiple>

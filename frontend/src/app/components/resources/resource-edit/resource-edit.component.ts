@@ -43,4 +43,8 @@ export class ResourceEditComponent implements OnInit {
     console.log(this.data.boughtAt);
   }
 
+  getHeader(): string {
+    return this.data.edit ? "Edit " + this.data.name : "New resource";
+  }
+
 }

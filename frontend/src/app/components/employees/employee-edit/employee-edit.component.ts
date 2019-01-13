@@ -33,4 +33,8 @@ export class EmployeeEditComponent implements OnInit {
     }
   }
 
+  getHeader(): string {
+    return this.data.edit ? "Edit " + this.data.lastName : "New Employee";
+  }
+
 }

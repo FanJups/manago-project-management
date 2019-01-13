@@ -24,4 +24,8 @@ export class CustomerEditComponent implements OnInit {
       this.data['email'].length > 0);
   }
 
+  getHeader(): string {
+    return this.data.edit ? "Edit " + this.data.lastName : "New Customer";
+  }
+
 }
