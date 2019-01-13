@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{getHeader()}}</h1>
 <div mat-dialog>
-  <mat-form-field>
+  <mat-form-field *ngIf="!data.edit">
     <input matInput required [(ngModel)]="data.name" placeholder="Give it a name">
   </mat-form-field>
   <mat-form-field>

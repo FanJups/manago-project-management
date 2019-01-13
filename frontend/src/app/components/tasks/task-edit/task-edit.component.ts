@@ -8,7 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: []
 })
 export class TaskEditComponent implements OnInit {
-  parentTaskForm = new FormControl('valid', [
+  statusesForm = new FormControl('invalid', [
     Validators.required
   ]);
   constructor(
@@ -28,7 +28,13 @@ export class TaskEditComponent implements OnInit {
   }
 
   isInvalid(): boolean {
-    return false;
+    return this.data.name.length < 1 || !this.data.status.hasOwnProperty('name'));
+  }
+
+  changedStatus(event: any): void {
+    if (event.isUserInput) {
+      this.data.status = event.source.value;
+    }
   }
 
 }

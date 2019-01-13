@@ -7,6 +7,8 @@ import {TaskEditComponent} from '../task-edit/task-edit.component';
 import {MatDialog, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {HistoryComponent} from '../../history/history.component';
 import {HistoryService} from '../../../services/history.service';
+import {Status} from '../../../models/status';
+import {StatusService} from '../../../services/status.service';
 
 @Component({
   selector: 'app-task',
@@ -16,6 +18,7 @@ import {HistoryService} from '../../../services/history.service';
 export class TaskComponent implements OnInit {
   task: Task = new Task();
   subtasks: Task[];
+  statuses: Status[];
   displayedColumns = ['taskId', 'name' , 'status', 'history', 'edit', 'delete'];
 
   constructor(
@@ -25,7 +28,8 @@ export class TaskComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private statusService: StatusService
   ) { }
 
   ngOnInit() {
@@ -33,6 +37,7 @@ export class TaskComponent implements OnInit {
       this.route.params['value'].projectName,
       this.route.params['value'].taskId.toString()
     );
+    this.getStatuses();
   }
 
   getTask(projectName: string, taskId: string): void {
@@ -40,6 +45,13 @@ export class TaskComponent implements OnInit {
       this.task = resp;
       this.subtasks = this.task.subTaskResponses.slice();
       console.log(resp);
+    });
+  }
+
+  getStatuses(): void {
+    this.statusService.getStatuses().subscribe(resp => {
+      console.log(resp);
+      this.statuses = resp;
     });
   }
 
@@ -53,14 +65,14 @@ export class TaskComponent implements OnInit {
       data: { edit: true,
         name: subtask.name,
         subtasks: subtask.subTaskResponses,
-        status: subtask.status,
-        availableStatuses: []}
+        status: subtask.statusResponse,
+        availableStatuses: this.statuses.slice()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.taskService.updateTask(
-        {name: result.name, subtaskResponses: '', status: result.status, parentId: subtask.parentId},
+        {name: result.name, subtaskResponses: '', statusRequest: result.status, parentId: subtask.parentId},
         this.route.params['value'].projectName,
         subtask.taskId.toString())
         .subscribe(resp => {
@@ -87,12 +99,12 @@ export class TaskComponent implements OnInit {
       data: {  edit: false,
         name: '',
         status: '',
-        availableStatuses: []}
+        availableStatuses: this.statuses.slice()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.taskService.createTask({name: result.name, subtaskResponses: [], status: result.status, parentId: this.task.taskId},
+      this.taskService.createTask({name: result.name, subtaskResponses: [], statusRequest: result.status, parentId: this.task.taskId},
         this.route.params['value'].projectName)
         .subscribe(resp => {
           this.snackbar.open('Successfully created new subtask', '', {
@@ -115,9 +127,9 @@ export class TaskComponent implements OnInit {
   onHistoryClick(task: Task): void {
     this.historyService.getHistory(task.taskId.toString()).subscribe(resp => {
       const dialogRef = this.dialog.open(HistoryComponent, {
-        width: '500px',
+        width: '700px',
         data: {  edit: false,
-          history: new MatTableDataSource()}
+          history: resp}
       });
     });
   }
@@ -139,6 +151,10 @@ export class TaskComponent implements OnInit {
         this.route.params['value'].taskId.toString()
       );
     });
+  }
+
+  getStatus(task: Task): string {
+    return task.statusResponse ? task.statusResponse.name : "";
   }
 
 }

@@ -47,7 +47,7 @@
 
             <ng-container matColumnDef="status">
               <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-              <mat-cell *matCellDef="let subtask"> {{subtask.statusResponse.name}} </mat-cell>
+              <mat-cell *matCellDef="let subtask"> {{getStatus(subtask)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="history">

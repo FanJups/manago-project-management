@@ -40,6 +40,7 @@ import { UserEditComponent } from './components/users/user-edit/user-edit.compon
 import { StatusesComponent } from './components/statuses/statuses.component';
 import { HistoryComponent } from './components/history/history.component';
 import {HistoryService} from './services/history.service';
+import {StatusService} from './services/status.service';
 
 
 @NgModule({
@@ -79,7 +80,7 @@ import {HistoryService} from './services/history.service';
     ReactiveFormsModule
   ],
   entryComponents: [UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
-  providers: [AppEndpoints, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
+  providers: [AppEndpoints, StatusService, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

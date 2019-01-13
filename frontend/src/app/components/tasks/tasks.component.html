@@ -24,7 +24,7 @@
 
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-          <mat-cell *matCellDef="let subtask"> {{subtask.statusResponse.name}} </mat-cell>
+          <mat-cell *matCellDef="let task"> {{getStatus(task)}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="subtaskCount">

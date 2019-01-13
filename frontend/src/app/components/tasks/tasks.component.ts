@@ -8,6 +8,8 @@ import {TaskEditComponent} from './task-edit/task-edit.component';
 import {CustomerEditComponent} from '../customers/customer-edit/customer-edit.component';
 import {HistoryComponent} from '../history/history.component';
 import {HistoryService} from '../../services/history.service';
+import {Status} from '../../models/status';
+import {StatusService} from '../../services/status.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,6 +18,7 @@ import {HistoryService} from '../../services/history.service';
 })
 export class TasksComponent implements OnInit {
   tasks: MatTableDataSource<Task> = new MatTableDataSource<Task>();
+  statuses: Status[];
   displayedColumns = ['taskId', 'subtaskCount', 'name' , 'status', 'history', 'edit', 'detail', 'delete'];
 
   constructor(
@@ -24,11 +27,13 @@ export class TasksComponent implements OnInit {
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
     private taskService: TaskService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private statusService: StatusService
   ) { }
 
   ngOnInit() {
     this.getTasks();
+    this.getStatuses();
   }
 
   showTask(task: Task): void {
@@ -40,15 +45,15 @@ export class TasksComponent implements OnInit {
       width: '350px',
       data: { edit: true,
         name: task.name,
-        status: task.status,
+        status: task.statusResponse,
         availableTasks: this.tasks.data.slice().filter(t => t.taskId !== task.taskId ),
-        availableStatuses: []}
+        availableStatuses: this.statuses.slice()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.taskService.updateTask(
-        {name: result.name, subtaskResponses: task.subTaskResponses, status: result.status, parentId: task.parentId},
+        {name: result.name, subtaskResponses: task.subTaskResponses, statusRequest: result.status, parentId: task.parentId},
         this.route.params['value'].projectName,
         task.taskId.toString())
         .subscribe(resp => {
@@ -62,6 +67,7 @@ export class TasksComponent implements OnInit {
           });
         }, () => {
           this.getTasks();
+          this.getStatuses();
         });
     });
   }
@@ -72,12 +78,12 @@ export class TasksComponent implements OnInit {
       data: {  edit: false,
         name: '',
         status: '',
-        availableStatuses: []}
+        availableStatuses: this.statuses.slice()}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.taskService.createTask({name: result.name, subtaskResponses: [], status: result.status, parentId: null},
+      this.taskService.createTask({name: result.name, subtaskResponses: [], statusRequest: result.status, parentId: null},
         this.route.params['value'].projectName)
         .subscribe(resp => {
           this.snackbar.open('Successfully created new task', '', {
@@ -90,6 +96,7 @@ export class TasksComponent implements OnInit {
           });
         }, () => {
           this.getTasks();
+          this.getStatuses();
         });
     });
   }
@@ -106,6 +113,7 @@ export class TasksComponent implements OnInit {
       });
     }, () => {
       this.getTasks();
+      this.getStatuses();
     });
   }
 
@@ -113,7 +121,13 @@ export class TasksComponent implements OnInit {
     this.taskService.getTasks(this.route.params['value'].projectName).subscribe(resp => {
       console.log(resp);
       this.tasks.data = resp;
-      console.log(this.tasks.data);
+    });
+  }
+
+  getStatuses(): void {
+    this.statusService.getStatuses().subscribe(resp => {
+      console.log(resp);
+      this.statuses = resp;
     });
   }
 
@@ -124,12 +138,16 @@ export class TasksComponent implements OnInit {
   onHistoryClick(task: Task): void {
     this.historyService.getHistory(task.taskId.toString()).subscribe(resp => {
       const dialogRef = this.dialog.open(HistoryComponent, {
-        width: '500px',
+        width: '700px',
         data: {  edit: false,
-          history: new MatTableDataSource()}
+          history: resp}
       });
     });
 
+  }
+
+  getStatus(task: Task): string {
+    return task.statusResponse ? task.statusResponse.name : "";
   }
 
 }

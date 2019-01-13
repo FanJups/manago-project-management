@@ -12,10 +12,15 @@ export class HistoryComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  displayDate(date: string) {
+    return new Date(date).toLocaleTimeString() + "  " + new Date(date).toDateString();
   }
 
 }

@@ -3,7 +3,7 @@
   <mat-table #table [dataSource]="data.history">
     <ng-container matColumnDef="createdAt">
       <mat-header-cell *matHeaderCellDef> Operation Date </mat-header-cell>
-      <mat-cell *matCellDef="let history"> {{history.createdAt}} </mat-cell>
+      <mat-cell *matCellDef="let history"> {{displayDate(history.createdAt)}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="operationId">

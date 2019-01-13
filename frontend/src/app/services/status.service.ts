@@ -17,7 +17,7 @@ export class StatusService {
   }
 
   getStatus(statusId: string): Observable<Status> {
-    return this.httpClient.get<Status>(this.appEndpoints.go().status(resourceId), {observe: 'body'});
+    return this.httpClient.get<Status>(this.appEndpoints.go().status(statusId), {observe: 'body'});
   }
 
   createStatus(statusData: any): Observable<Status> {
@@ -25,10 +25,10 @@ export class StatusService {
   }
 
   updateStatus(statusData: any, statusId: string): Observable<Status> {
-    return this.httpClient.put<Status>(this.appEndpoints.go().status(resourceId), statusData, {responseType: 'json'});
+    return this.httpClient.put<Status>(this.appEndpoints.go().status(statusId), statusData, {responseType: 'json'});
   }
 
   deleteStatus(statusId: string): Observable<any> {
-    return this.httpClient.delete(this.appEndpoints.go().status(resourceId));
+    return this.httpClient.delete(this.appEndpoints.go().status(statusId));
   }
 }

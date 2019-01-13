@@ -12,7 +12,7 @@ export class HistoryService {
   ) {
   }
 
-  getHistory(taskId: string): Observable<History> {
-    return this.httpClient.get<History>(this.appEndpoints.go().history(taskId), {observe: 'body'});
+  getHistory(taskId: string): Observable<History[]> {
+    return this.httpClient.get<History[]>(this.appEndpoints.go().history(taskId), {observe: 'body'});
   }
 }
