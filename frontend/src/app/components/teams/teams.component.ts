@@ -138,7 +138,7 @@ export class TeamsComponent implements OnInit {
       });
     }, err => {
       console.log(err)
-      this.snackbar.open(err.error.errorMessage, '', {
+      this.snackbar.open("You can not delete a team which has resources or project assigned", '', {
         duration: 10000
       });
     }, () => {

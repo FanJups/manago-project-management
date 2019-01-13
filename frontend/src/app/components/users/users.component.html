@@ -19,8 +19,8 @@
         </ng-container>
 
         <ng-container matColumnDef="employeeId">
-          <mat-header-cell *matHeaderCellDef> Employee Id </mat-header-cell>
-          <mat-cell *matCellDef="let user"> {{user.employeeId}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Employee </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{displayEmployee(user)}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="detail">

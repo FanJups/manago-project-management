@@ -15,7 +15,7 @@ export class UserEditComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-
+    this.data.employee = null;
   }
 
   onNoClick(): void {
@@ -28,7 +28,7 @@ export class UserEditComponent implements OnInit {
 
   changedEmployee(event: any): void {
     if(event.isUserInput) {
-      this.data.employeeId = event.source.value.employeeId;
+      this.data.employee = event.source.value;
     }
   }
 

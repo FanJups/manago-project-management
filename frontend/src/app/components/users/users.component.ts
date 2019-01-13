@@ -67,16 +67,34 @@ export class UsersComponent implements OnInit {
   createUserDialog(): void {
     const dialogRef = this.dialog.open(UserEditComponent, {
       width: '350px',
-      data: { edit: false, username: '', email: '', employeeId: '', availableEmployees: this.availableEmployees}
+      data: { edit: false,
+        username: '',
+        email: '',
+        employee: '',
+        availableEmployees: this.availableEmployees
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      if ((result.employee && result.employee.employeeId)) {
+        let drop = false;
+        this.users.data.forEach(u => {
+          if (u.employeeResponse && u.employeeResponse.employeeId === result.employee.employeeId) {
+            this.snackbar.open("This employee is already connected with another user!", '', {
+              duration: 10000
+            });
+            drop = true;
+            return;
+          }
+        });
+        if (drop) return;
+      }
       this.userService.createUser(
         {
           username: result.username,
           email: result.email,
-          employeeId: result.employeeId
+          employeeId: result.employee.employeeId
         }
       ).subscribe(resp => {
         this.snackbar.open('Successfully created new user', '', {
@@ -100,20 +118,33 @@ export class UsersComponent implements OnInit {
         edit: true,
         username: user.username,
         email: user.email,
-        employeeId: user.employeeId,
+        employee: user.employeeResponse,
         availableEmployees: this.availableEmployees
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      if (!user.employeeResponse || (result.employee && result.employee.employeeId !== user.employeeResponse.employeeId)) {
+        let drop = false;
+        this.users.data.forEach(u => {
+          if (u.employeeResponse && u.employeeResponse.employeeId === result.employee.employeeId) {
+            this.snackbar.open("This employee is already connected with another user!", '', {
+              duration: 10000
+            });
+            drop = true;
+            return;
+          }
+        });
+        if (drop) return;
+      }
       this.userService.updateUser({
         username: result.username,
         email: result.email,
-        employeeId: result.employeeId
+        employeeId: result.employee ? result.employee.employeeId : null
       }, user.username)
         .subscribe(resp => {
-          this.snackbar.open('Successfully updated customer', '', {
+          this.snackbar.open('Successfully updated user', '', {
             duration: 2500
           });
         }, err => {
@@ -125,6 +156,10 @@ export class UsersComponent implements OnInit {
           this.getUsers();
         });
     });
+  }
+
+  displayEmployee(user: User): string {
+    return user.employeeResponse ? user.employeeResponse.firstName + " " + user.employeeResponse.lastName : ""
   }
 
 }
