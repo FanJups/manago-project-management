@@ -12,6 +12,7 @@ export class AppEndpoints {
     customer: (customerId) => `${this.host}/customers/${customerId}`,
     resources: () => `${this.host}/resources`,
     resource: (resourceId) => `${this.host}/resources/${resourceId}`,
+    resourceTypes: () => `${this.host}/resources/types`,
     employees: () => `${this.host}/employees`,
     employee: (employeeId) => `${this.host}/employees/${employeeId}`,
     users: () => `${this.host}/users`,

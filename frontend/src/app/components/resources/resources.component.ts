@@ -14,6 +14,7 @@ import {ResourceType} from '../../models/resourceType';
 })
 export class ResourcesComponent implements OnInit {
   resources: MatTableDataSource<Resource> = new MatTableDataSource();
+  avalilableResourceTypes: ResourceType[];
   displayedColumns = [ 'name', 'resourceType', 'manufacturer', 'cost', 'boughtAt', 'edit', 'detail', 'delete'];
   constructor(
     private resourceService: ResourceService,
@@ -30,6 +31,9 @@ export class ResourcesComponent implements OnInit {
     this.resourceService.getResources().subscribe(resp => {
       this.resources.data = resp;
       console.log(resp);
+    });
+    this.resourceService.getTypes().subscribe(resp => {
+      this.avalilableResourceTypes = resp;
     });
   }
 
@@ -56,7 +60,13 @@ export class ResourcesComponent implements OnInit {
   createResourceDialog(): void {
     const dialogRef = this.dialog.open(ResourceEditComponent, {
       width: '350px',
-      data: { edit: false, name: '', resourceType: '', cost: 0, manufacturer: '', boughtAt: Date.now()}
+      data: { edit: false,
+        name: '',
+        resourceType: '',
+        cost: 0,
+        manufacturer: '',
+        boughtAt: Date.now(),
+        availableResourceTypes: this.avalilableResourceTypes}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +76,7 @@ export class ResourcesComponent implements OnInit {
           name: result.name,
           cost: result.cost,
           manufacturer: result.manufacturer,
-          resourceType: result.resourceType,
+          resourceTypeRequest: result.resourceType,
           boughtAt: result.boughtAt
         }
       ).subscribe(resp => {
@@ -93,7 +103,8 @@ export class ResourcesComponent implements OnInit {
         resourceType: resource.resourceType,
         cost: resource.cost,
         manufacturer: resource.manufacturer,
-        boughtAt: resource.boughtAt
+        boughtAt: resource.boughtAt,
+        availableResourceTypes: this.avalilableResourceTypes
       }
     });
 
@@ -103,7 +114,7 @@ export class ResourcesComponent implements OnInit {
         name: result.name,
         cost: result.cost,
         manufacturer: result.manufacturer,
-        resourceType: result.resourceType,
+        resourceTypeRequest: result.resourceType,
         boughtAt: result.boughtAt
       }, resource.resourceId)
         .subscribe(resp => {

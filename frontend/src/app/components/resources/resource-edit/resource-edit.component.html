@@ -1,3 +1,32 @@
-<p>
-  resource-edit works!
-</p>
+<div mat-dialog>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.name" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.cost" placeholder="Cost">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.manufacturer" placeholder="Manufacturer">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [formControl]="resourceTypeForm" placeholder="Resource Type" >
+      <mat-option *ngFor="let resType of data.availableResourceTypes" [value]="resType" (onSelectionChange)="changedResourceType($event)">
+        {{resType.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="resourceTypeForm.hasError('required')">You must make a selection</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Bought at"
+           [formControl]="serializedDate" (dateChange)="onDateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>

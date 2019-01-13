@@ -79,7 +79,7 @@ import {StatusService} from './services/status.service';
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
+  entryComponents: [ResourceEditComponent, UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
   providers: [AppEndpoints, StatusService, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
   bootstrap: [AppComponent]
 })

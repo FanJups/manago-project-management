@@ -45,6 +45,12 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user: User): void {
+    if (user.employeeResponse) {
+      this.snackbar.open("Can not delete user with associated employee", '', {
+        duration: 10000
+      });
+      return;
+    }
     this.userService.deleteUser(user.username)
       .subscribe(resp => {
         this.snackbar.open('Successfully removed user', '', {
@@ -94,7 +100,7 @@ export class UsersComponent implements OnInit {
         {
           username: result.username,
           email: result.email,
-          employeeId: result.employee.employeeId
+          employeeId: result.employee ? result.employee.employeeId : null
         }
       ).subscribe(resp => {
         this.snackbar.open('Successfully created new user', '', {
