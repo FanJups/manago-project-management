@@ -1,0 +1,28 @@
+<script src="../customer-edit/customer-edit.component.ts"></script>
+<mat-accordion>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{customer.firstName}} {{customer.lastName}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item>
+        <p><strong>Email: </strong> {{customer.email}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>Company: </strong>{{customer.company}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>Zip Code: </strong>{{customer.zipCode}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>Address: </strong>{{customer.address}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>City: </strong>{{customer.city}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

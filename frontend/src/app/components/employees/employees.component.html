@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-title>Employees</mat-card-title>
+  <mat-card-subtitle>
+    <button mat-button (click)="createEmployeeDialog()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="employees">
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="salary">
+          <mat-header-cell *matHeaderCellDef> Salary </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.salary}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="employmentType">
+          <mat-header-cell *matHeaderCellDef> Employment Type </mat-header-cell>
+          <mat-cell *matCellDef="let employee"> {{employee.employmentType}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let employee"> <mat-icon (click)="showEmployee(employee)">more_horiz</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let employee"> <mat-icon (click)="editEmployeeDialog(employee)" >edit</mat-icon> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let employee"> <mat-icon (click)="deleteEmployee(employee)" >delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+

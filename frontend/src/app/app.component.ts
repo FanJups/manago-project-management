@@ -16,4 +16,29 @@ export class AppComponent {
   goBack() {
     this.router.navigate(['']);
   }
+
+  goToCustomers() {
+    this.router.navigate(['customers']);
+  }
+
+  goToTeams() {
+    this.router.navigate(['teams']);
+  }
+
+  goToUsers() {
+    this.router.navigate(['users']);
+  }
+
+  goToResources() {
+    this.router.navigate(['resources']);
+  }
+
+  goToEmployees() {
+    this.router.navigate(['employees']);
+  }
+
+  goToStatuses() {
+    this.router.navigate(['statuses']);
+
+  }
 }

@@ -1,10 +1,10 @@
 <mat-card>
   <mat-card-title>Teams</mat-card-title>
   <mat-card-subtitle>
-    <button mat-button >
+    <button mat-button (click)="createTeamDialog()">
       <mat-icon>add_box</mat-icon>
     </button>
-    <button mat-button >
+    <button mat-button (click)="onCalculate()">
       <p>Calculate</p>
     </button>
   </mat-card-subtitle>
@@ -28,17 +28,17 @@
 
         <ng-container matColumnDef="detail">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon (click)="showTeam(team)" >more_horiz</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >edit</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon (click)="editTeamDialog(team)">edit</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon >delete</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let team"> <mat-icon (click)="deleteTeam(team)">delete</mat-icon> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

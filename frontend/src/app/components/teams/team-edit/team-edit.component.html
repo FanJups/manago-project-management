@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{getHeader()}}</h1>
+<div mat-dialog>
+  <mat-form-field *ngIf="!data.edit">
+    <input matInput required [(ngModel)]="data.name" placeholder="Team name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [formControl]="employeesForm" placeholder="Employees" multiple>
+      <mat-option *ngFor="let employee of data.availableEmployees" [value]="employee" (onSelectionChange)="changedEmployee($event)">{{employee.firstName + " " + employee.lastName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [formControl]="resourcesForm" placeholder="Resources" multiple>
+      <mat-option *ngFor="let resource of data.availableResources" [value]="resource" (onSelectionChange)="changedResource($event)">{{resource.name + " | " + resource.resourceType.name + " | " + resource.manufacturer}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>
+

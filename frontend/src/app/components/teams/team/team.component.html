@@ -1,0 +1,97 @@
+<script src="team.component.ts"></script>
+<mat-accordion>
+  <mat-expansion-panel  expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{team.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item>
+        <p><strong>Team size </strong>{{team.size}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>Monthly cost: </strong>{{team.monthlyCost}}</p>
+      </mat-list-item>
+    </mat-list>
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Resources
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-table #table [dataSource]="team.resourceResponses">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let resource"> {{resource.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="manufacturer">
+              <mat-header-cell *matHeaderCellDef> Manufacturer </mat-header-cell>
+              <mat-cell *matCellDef="let resource"> {{resource.manufacturer}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="resourceType">
+              <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+              <mat-cell *matCellDef="let resource"> {{resource.resourceType.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="cost">
+              <mat-header-cell *matHeaderCellDef> Cost </mat-header-cell>
+              <mat-cell *matCellDef="let resource"> {{resource.cost}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="boughtAt">
+              <mat-header-cell *matHeaderCellDef> Bought </mat-header-cell>
+              <mat-cell *matCellDef="let resource"> {{getDate(resource.boughtAt)}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="resourceDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: resourceDisplayedColumns;"></mat-row>
+          </mat-table>
+        </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Employees
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-table #table [dataSource]="team.employeeResponses">
+            <ng-container matColumnDef="firstName">
+              <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+              <mat-cell *matCellDef="let employee"> {{employee.firstName}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="lastName">
+              <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+              <mat-cell *matCellDef="let employee"> {{employee.lastName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="salary">
+              <mat-header-cell *matHeaderCellDef> Salary </mat-header-cell>
+              <mat-cell *matCellDef="let employee"> {{employee.salary}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="employmentType">
+              <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+              <mat-cell *matCellDef="let employee"> {{employee.employmentType}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="employeeDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: employeeDisplayedColumns;"></mat-row>
+          </mat-table>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>

@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{getHeader()}}</h1>
+<div mat-dialog>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.username" placeholder="Username">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required email [(ngModel)]="data.email" placeholder="Email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [formControl]="employeesForm" placeholder="Employeee" >
+      <mat-option *ngFor="let employee of data.availableEmployees" [value]="employee" (onSelectionChange)="changedEmployee($event)">
+        {{employee.firstName}} {{employee.lastName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>

@@ -1,7 +1,8 @@
+<script src="projects.component.ts"></script>
 <mat-card>
-  <mat-card-title>Your Projects</mat-card-title>
+  <mat-card-title>Projects</mat-card-title>
   <mat-card-subtitle>
-    <button mat-button >
+    <button mat-button (click)="createProjectDialog()">
       <mat-icon>add_box</mat-icon>
     </button>
   </mat-card-subtitle>
@@ -30,17 +31,17 @@
 
         <ng-container matColumnDef="detail">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon (click)="showProject(project)">more_horiz</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >edit</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon (click)="editProjectDialog(project)">edit</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon >delete</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let project"> <mat-icon (click)="deleteProject(project)">delete</mat-icon> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

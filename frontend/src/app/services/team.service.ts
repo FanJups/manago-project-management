@@ -16,4 +16,20 @@ export class TeamService {
   getTeams(): Observable<Team[]> {
     return this.httpClient.get<Team[]>(this.appEndpoints.go().teams(), {observe: 'body'});
   }
+
+  getTeam(name: string): Observable<Team> {
+    return this.httpClient.get<Team>(this.appEndpoints.go().team(name), {observe: 'body'});
+  }
+
+  createTeam(teamData: any): Observable<Team> {
+    return this.httpClient.post<Team>(this.appEndpoints.go().teams(), teamData, {responseType: 'json'});
+  }
+
+  updateTeam(teamData: any, name: string): Observable<Team> {
+    return this.httpClient.put<Team>(this.appEndpoints.go().team(name), teamData, {responseType: 'json'});
+  }
+
+  deleteTeam(name: string): Observable<any> {
+    return this.httpClient.delete(this.appEndpoints.go().team(name));
+  }
 }

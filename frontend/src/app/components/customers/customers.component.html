@@ -1,18 +1,13 @@
 <mat-card>
   <mat-card-title>Customers</mat-card-title>
   <mat-card-subtitle>
-    <button mat-button >
+    <button mat-button (click)="createCustomerDialog()">
       <mat-icon>add_box</mat-icon>
     </button>
   </mat-card-subtitle>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table #table [dataSource]="customers">
-        <ng-container matColumnDef="customerId">
-          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-          <mat-cell *matCellDef="let customer"> {{customer.customerId}} </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="firstName">
           <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
           <mat-cell *matCellDef="let customer"> {{customer.firstName}} </mat-cell>
@@ -48,20 +43,26 @@
           <mat-cell *matCellDef="let customer"> {{customer.city}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="data">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Invoice </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon (click)="getData(customer)" >info</mat-icon> </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="detail">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Detail </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >more_horiz</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon (click)="showCustomer(customer)">more_horiz</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >edit</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon (click)="editCustomerDialog(customer)" >edit</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="delete">
           <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
-          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon >delete</mat-icon> </mat-cell>
+          <mat-cell class="narrow-column" *matCellDef="let customer"> <mat-icon (click)="deleteCustomer(customer)" >delete</mat-icon> </mat-cell>
         </ng-container>
+
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

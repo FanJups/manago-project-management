@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{getHeader()}}</h1>
+<div mat-dialog>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.firstName" placeholder="First Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required [(ngModel)]="data.lastName" placeholder="Last Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.salary" placeholder="Salary">
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [formControl]="employmentTypeForm" placeholder="Employment Type" >
+      <mat-option *ngFor="let empType of empTypes" [value]="empType" (onSelectionChange)="changedEmploymentType($event)">
+        {{empType}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="employmentTypeForm.hasError('required')">You must make a selection</mat-error>
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="isInvalid()">OK</button>
+</div>
+

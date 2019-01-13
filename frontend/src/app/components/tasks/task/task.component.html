@@ -1,0 +1,76 @@
+<script src="task.component.ts"></script>
+<mat-accordion>
+  <mat-expansion-panel  expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{task.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item>
+        <p><strong>Task Id: </strong>{{task.taskId}}</p>
+      </mat-list-item>
+      <mat-list-item *ngIf="task.parentId">
+        <p><strong>Parent Task: </strong>
+          <a (click)="navigateToParent(task)">
+            {{task.parentId}}
+          </a>
+        </p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>Status: </strong></p>
+      </mat-list-item>
+    </mat-list>
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel expanded="false">
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Subtasks
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <button (click)="createSubTaskDialog()" mat-raised-button>
+            New Subtask
+          </button>
+          <mat-table #table [dataSource]="subtasks">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let subtask"> {{subtask.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="taskId">
+              <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+              <mat-cell *matCellDef="let subtask"> {{subtask.taskId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let subtask"> {{getStatus(subtask)}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="history">
+              <mat-header-cell class="narrow-column" *matHeaderCellDef> History </mat-header-cell>
+              <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="onHistoryClick(subtask)">history</mat-icon> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell class="narrow-column" *matHeaderCellDef> Edit </mat-header-cell>
+              <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="editSubTaskDialog(subtask)">edit</mat-icon> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+              <mat-cell class="narrow-column" *matCellDef="let subtask"> <mat-icon (click)="deleteSubTask(subtask)">delete</mat-icon> </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-expansion-panel>
+</mat-accordion>

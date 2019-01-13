@@ -1,0 +1,19 @@
+<script src="../employee-edit/employee-edit.component.ts"></script>
+<mat-accordion>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{employee.firstName}} {{employee.lastName}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item>
+        <p><strong>Salary: </strong> {{employee.salary}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p><strong>EmploymentType: </strong>{{employee.employmentType}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

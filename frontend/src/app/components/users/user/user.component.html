@@ -1,0 +1,18 @@
+<mat-accordion>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{user.username}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item>
+        <p><strong>Email: </strong> {{user.email}}</p>
+      </mat-list-item>
+      <mat-list-item *ngIf="user.employeeId">
+        <p><strong>EmployeeId: </strong>{{user.employeeId}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>
