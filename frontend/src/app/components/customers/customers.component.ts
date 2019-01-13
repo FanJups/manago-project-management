@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {CustomerService} from '../../services/customer.service';
 import {ProjectEditComponent} from '../projects/project-edit/project-edit.component';
 import {CustomerEditComponent} from './customer-edit/customer-edit.component';
+import {CustomerInvoiceDataComponent} from './customer-invoice-data/customer-invoice-data.component';
+import {DatabaseService} from '../../services/database.service';
 
 @Component({
   selector: 'app-customers',
@@ -13,13 +15,14 @@ import {CustomerEditComponent} from './customer-edit/customer-edit.component';
 })
 export class CustomersComponent implements OnInit {
   customers: MatTableDataSource<Customer> = new MatTableDataSource();
-  displayedColumns = ['firstName', 'lastName', 'email', 'company', 'address', 'zipCode', 'city', 'edit', 'detail', 'delete'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'company', 'address', 'zipCode', 'city', 'data', 'edit', 'detail', 'delete'];
 
   constructor(
     private customerService: CustomerService,
     private router: Router,
     public dialog: MatDialog,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private databaseService: DatabaseService
   ) { }
 
   ngOnInit() {
@@ -122,4 +125,21 @@ export class CustomersComponent implements OnInit {
     });
   }
 
+  getData(customer: Customer): void {
+    this.databaseService.function(customer.customerId.toString()).subscribe(resp => {
+        const dialogRef = this.dialog.open(CustomerInvoiceDataComponent, {
+          width: '650px',
+          data: {
+            info: resp
+          }
+        });
+      }, err => {
+        const dialogRef = this.dialog.open(CustomerInvoiceDataComponent, {
+          width: '400px',
+          data: {
+            info: `Could not fetch data for ${customer.firstName} ${customer.lastName}`
+          }
+        });
+    });
+  }
 }

@@ -23,7 +23,9 @@ export class AppEndpoints {
     task: (projectName, taskId) => `${this.host}/projects/${projectName}/tasks/${taskId}`,
     history: (taskId) => `${this.host}/history/${taskId}`,
     statuses: () => `${this.host}/statuses`,
-    status: (statusName) => `${this.host}/statuses/${statusName}`
+    status: (statusName) => `${this.host}/statuses/${statusName}`,
+    function: (customerId) => `${this.host}/customers/${customerId}/function`,
+    procedure: () => `${this.host}/procedure`
   };
   go() {
     return this.paths;

@@ -41,6 +41,8 @@ import { StatusesComponent } from './components/statuses/statuses.component';
 import { HistoryComponent } from './components/history/history.component';
 import {HistoryService} from './services/history.service';
 import {StatusService} from './services/status.service';
+import {DatabaseService} from './services/database.service';
+import { CustomerInvoiceDataComponent } from './components/customers/customer-invoice-data/customer-invoice-data.component';
 
 
 @NgModule({
@@ -69,7 +71,8 @@ import {StatusService} from './services/status.service';
     ResourceEditComponent,
     UserEditComponent,
     StatusesComponent,
-    HistoryComponent
+    HistoryComponent,
+    CustomerInvoiceDataComponent
   ],
   imports: [
     BrowserModule,
@@ -79,8 +82,8 @@ import {StatusService} from './services/status.service';
     MaterialModule,
     ReactiveFormsModule
   ],
-  entryComponents: [ResourceEditComponent, UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
-  providers: [AppEndpoints, StatusService, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
+  entryComponents: [CustomerInvoiceDataComponent, ResourceEditComponent, UserEditComponent, HistoryComponent, ProjectEditComponent, CustomerEditComponent, TaskEditComponent, EmployeeEditComponent, TeamEditComponent],
+  providers: [AppEndpoints, DatabaseService, StatusService, CustomerService, ProjectService, TeamService, TaskService, EmployeeService, ResourceService, UserService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

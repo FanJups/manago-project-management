@@ -8,6 +8,7 @@ import {Resource} from '../../models/resource';
 import {Employee} from '../../models/employee';
 import {EmployeeService} from '../../services/employee.service';
 import {ResourceService} from '../../services/resource.service';
+import {DatabaseService} from '../../services/database.service';
 
 @Component({
   selector: 'app-teams',
@@ -27,7 +28,8 @@ export class TeamsComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private databaseService: DatabaseService
   ) { }
 
   ngOnInit() {
@@ -143,6 +145,13 @@ export class TeamsComponent implements OnInit {
       });
     }, () => {
       this.getTeams();
+    });
+  }
+
+  onCalculate(): void {
+    this.databaseService.procedure().subscribe(resp => {
+      this.getTeams();
+      this.getAdditionals();
     });
   }
 
