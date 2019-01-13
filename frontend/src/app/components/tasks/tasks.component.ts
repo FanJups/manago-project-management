@@ -103,7 +103,7 @@ export class TasksComponent implements OnInit {
 
   deleteTask(task: Task): void {
     this.taskService.deleteTask(this.route.params['value'].projectName, task.taskId.toString()).subscribe(resp => {
-      this.snackbar.open('Successfully removed task', '', {
+      this.snackbar.open('Successfully removed task and its subtasks', '', {
         duration: 2500
       });
     }, err => {

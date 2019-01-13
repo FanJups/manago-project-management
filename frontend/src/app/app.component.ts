@@ -36,4 +36,9 @@ export class AppComponent {
   goToEmployees() {
     this.router.navigate(['employees']);
   }
+
+  goToStatuses() {
+    this.router.navigate(['statuses']);
+
+  }
 }

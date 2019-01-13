@@ -16,6 +16,7 @@ import {EmployeeComponent} from '../components/employees/employee/employee.compo
 import {ResourceComponent} from '../components/resources/resource/resource.component';
 import {UserComponent} from '../components/users/user/user.component';
 import {TeamComponent} from '../components/teams/team/team.component';
+import {StatusesComponent} from '../components/statuses/statuses.component';
 
 
 const appRoutes: Routes = [
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
   {path: 'employees/:employeeId', component: EmployeeComponent},
   {path: 'resources/:resourceId', component: ResourceComponent},
   {path: 'users/:username', component: UserComponent},
+  {path: 'statuses', component: StatusesComponent},
   {path: '', redirectTo: '/projects', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent }
 ];

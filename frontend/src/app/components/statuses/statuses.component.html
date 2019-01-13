@@ -1,3 +1,32 @@
-<p>
-  statuses works!
-</p>
+<mat-card>
+  <mat-card-title>Statuses</mat-card-title>
+  <mat-card-subtitle>
+
+    <mat-form-field>
+      <input matInput required [(ngModel)]="newStatus" placeholder="Create new status">
+    </mat-form-field>
+    <button mat-button (click)="createStatus()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+
+
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table #table [dataSource]="statuses">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let status"> {{status.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <mat-header-cell class="narrow-column" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell class="narrow-column" *matCellDef="let status"> <mat-icon (click)="deleteStatus(status)">delete</mat-icon> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
