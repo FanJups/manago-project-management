@@ -28,7 +28,7 @@ export class TaskEditComponent implements OnInit {
   }
 
   isInvalid(): boolean {
-    return this.data.name.length < 1 || !this.data.status.hasOwnProperty('name'));
+    return this.data.name.length < 1 || !this.data.status.hasOwnProperty('name');
   }
 
   changedStatus(event: any): void {
