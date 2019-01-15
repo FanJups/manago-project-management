@@ -1,6 +1,7 @@
 package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import manago.com.restbackend.service.impl.SQLProcedureService;
 import manago.com.restbackend.service.impl.TeamServiceImpl;
 import manago.com.restbackend.shared.request.TeamRequest;
 import manago.com.restbackend.shared.response.TeamResponse;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.stream.MemoryCacheImageInputStream;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -22,10 +22,19 @@ public class TeamController {
     @Autowired
     TeamServiceImpl teamService;
 
+    @Autowired
+    SQLProcedureService sqlProcedureService;
+
     @RequestMapping(method = GET, path = "/teams", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<TeamResponse> getAllTeams() {
         log.info("GET /teams");
         return teamService.all();
+    }
+
+    @RequestMapping(method = GET, path = "/teams/procedure/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public void updateAllTeams(@PathVariable String name) {
+        log.info("GET /procedure");
+        sqlProcedureService.updateTeam(name);
     }
 
     @RequestMapping(method = GET, path = "/teams/{name}", produces = {MediaType.APPLICATION_JSON_VALUE})

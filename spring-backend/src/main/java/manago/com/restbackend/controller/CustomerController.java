@@ -1,6 +1,7 @@
 package manago.com.restbackend.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import manago.com.restbackend.service.impl.SQLFunctionService;
 import manago.com.restbackend.service.impl.CustomerServiceImpl;
 import manago.com.restbackend.shared.request.CustomerRequest;
 import manago.com.restbackend.shared.response.CustomerResponse;
@@ -19,6 +20,9 @@ public class CustomerController {
     @Autowired
     CustomerServiceImpl customerService;
 
+    @Autowired
+    SQLFunctionService sqlFunctionService;
+
     @RequestMapping(method = RequestMethod.GET, path = "/customers", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<CustomerResponse> getAllCustomers() {
         log.info("GET /customers");
@@ -29,6 +33,12 @@ public class CustomerController {
     public CustomerResponse getCustomer(@PathVariable String id) {
         log.info("GET /customers/" + id);
         return customerService.one(Long.parseLong(id));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/customers/{id}/function", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String getCustomerData(@PathVariable String id) {
+        log.info("GET /customers/" + id);
+        return sqlFunctionService.getCustomerData(customerService.one(Long.parseLong(id)).getCustomerId());
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/customers/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
