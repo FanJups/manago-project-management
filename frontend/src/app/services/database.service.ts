@@ -11,11 +11,11 @@ export class DatabaseService {
   ) {}
 
   function(custId: string): Observable<any> {
-    return this.httpClient.get(this.appEndpoints.go().function(custId), {observe: 'body'});
+    return this.httpClient.get(this.appEndpoints.go().function(custId), {observe: 'response'});
   }
 
-  procedure(): Observable<any> {
-    return this.httpClient.get(this.appEndpoints.go().procedure(), {observe: 'body'});
+  procedure(teamName: string): Observable<any> {
+    return this.httpClient.get(this.appEndpoints.go().procedure(teamName), {observe: 'body'});
   }
 
 }

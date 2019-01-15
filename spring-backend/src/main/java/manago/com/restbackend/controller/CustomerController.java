@@ -5,9 +5,12 @@ import manago.com.restbackend.service.impl.SQLFunctionService;
 import manago.com.restbackend.service.impl.CustomerServiceImpl;
 import manago.com.restbackend.shared.request.CustomerRequest;
 import manago.com.restbackend.shared.response.CustomerResponse;
+import manago.com.restbackend.shared.response.SQLResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,9 +39,11 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/customers/{id}/function", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String getCustomerData(@PathVariable String id) {
-        log.info("GET /customers/" + id);
-        return sqlFunctionService.getCustomerData(customerService.one(Long.parseLong(id)).getCustomerId());
+    public SQLResponse getCustomerData(@PathVariable String id) {
+        log.info("GET /customers/function" + id);
+        SQLResponse sqlResponse = new SQLResponse();
+        sqlResponse.setText(sqlFunctionService.getCustomerData(customerService.one(Long.parseLong(id)).getCustomerId()));
+        return sqlResponse;
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/customers/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})

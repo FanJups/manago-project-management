@@ -1,6 +1,7 @@
 package manago.com.restbackend.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -13,6 +14,7 @@ public class SQLProcedureService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public void updateTeam(String teamName) {
 
         //"login" this is the name of your procedure

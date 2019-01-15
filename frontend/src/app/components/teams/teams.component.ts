@@ -148,11 +148,26 @@ export class TeamsComponent implements OnInit {
     });
   }
 
-  onCalculate(): void {
-    this.databaseService.procedure().subscribe(resp => {
+  async onCalculate(): Promise<any> {
+    this.teams.data.forEach((team) => {
+      if (team.employeeResponses.length > 0) {
+        this.databaseService.procedure(team.name).subscribe(resp => {
+        });
+      }
+    });
+    await this.delay(3000).then(() => {
       this.getTeams();
       this.getAdditionals();
     });
+  }
+
+  async delay(ms: number): Promise<any> {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  getCost(num): number {
+    return Math.round(num);
+
   }
 
 }

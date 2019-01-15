@@ -126,12 +126,12 @@ export class CustomersComponent implements OnInit {
   }
 
   getData(customer: Customer): void {
+    console.log(customer);
     this.databaseService.function(customer.customerId.toString()).subscribe(resp => {
+      console.log(resp);
         const dialogRef = this.dialog.open(CustomerInvoiceDataComponent, {
           width: '650px',
-          data: {
-            info: resp
-          }
+          data: resp.body
         });
       }, err => {
         const dialogRef = this.dialog.open(CustomerInvoiceDataComponent, {

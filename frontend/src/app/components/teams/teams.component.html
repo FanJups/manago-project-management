@@ -18,12 +18,12 @@
 
         <ng-container matColumnDef="size">
           <mat-header-cell *matHeaderCellDef> Size </mat-header-cell>
-          <mat-cell *matCellDef="let team"> {{team.size}} </mat-cell>
+          <mat-cell *matCellDef="let team"> {{team.employeeResponses.length}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="monthlyCost">
           <mat-header-cell *matHeaderCellDef> Monthly Cost </mat-header-cell>
-          <mat-cell *matCellDef="let team"> {{team.monthlyCost}} </mat-cell>
+          <mat-cell *matCellDef="let team"> {{getCost(team.monthlyCost)}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="detail">
